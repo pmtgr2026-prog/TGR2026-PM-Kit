@@ -1,0 +1,10 @@
+ชื่อการ์ด: RPT03 ร่างรายงานรอบ 3
+List: 07 Checkpoint Decision และ Report
+Labels: Report, ร่าง
+Owner ตัวอย่าง: 
+
+=== คัดลอกส่วนนี้ลง Description ===
+ร่างสำหรับฝึกกรอก ยังไม่มีเหตุการณ์หรือผลการทำงานของรอบ 3
+
+เวลาส่งงาน xx.xx น.
+ใช้ practice_templates/REPORT.txt เป็นแนวทางเตรียมข้อมูล แล้วกรอก Template กรรมการในวันแข่งขัน

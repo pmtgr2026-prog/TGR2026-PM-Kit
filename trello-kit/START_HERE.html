@@ -1,0 +1,122 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TGR2026 Trello Kit</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1f3a5f;--teal:#2F6F73;--panel:#EEF6FA;--mint:#CFEFD9;--mintText:#1b5e3a;--peach:#FFE1C9;--hl:#d8f3d0;--grey:#DCE6F0;--ink:#1e2a38;--muted:#5b6b7b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font-family:'Prompt','Sarabun',system-ui,sans-serif;font-size:17px;line-height:1.8}
+a{color:var(--teal)}
+nav.top{border-bottom:1px solid var(--teal);background:#fff;position:sticky;top:0;z-index:5}
+nav.top .in{max-width:1040px;margin:auto;padding:10px 20px;display:flex;gap:6px 22px;flex-wrap:wrap;align-items:center}
+nav.top .brand{font-weight:600;color:var(--navy);margin-right:auto}
+nav.top a{text-decoration:none;color:var(--navy);padding:4px 0;border-bottom:2px solid transparent}
+nav.top a.cur{border-bottom-color:var(--teal);color:var(--teal)}
+main{max-width:1040px;margin:auto;padding:0 20px 60px}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:center;padding:36px 0 10px}
+.hero h1{font-size:34px;line-height:1.3;margin:0 0 10px;color:var(--navy);font-weight:600}
+.hero p.lead{font-size:19px;margin:0 0 8px}
+.hero .kicker{display:inline-block;background:var(--mint);color:var(--mintText);padding:2px 12px;font-size:14px;letter-spacing:.3px;margin-bottom:12px}
+.toc{border:1px solid var(--teal);background:var(--panel);padding:12px 18px;margin:14px 0 26px;font-size:15px}
+.toc b{color:var(--navy);margin-right:10px}
+.toc a{display:inline-block;margin:2px 14px 2px 0;text-decoration:none;color:var(--navy)}
+.toc a:before{content:"• ";color:var(--teal)}
+section{margin:34px 0}
+h2{font-size:24px;color:var(--navy);margin:0 0 14px;font-weight:600;padding-left:12px;border-left:5px solid var(--teal)}
+h3{font-size:19px;color:var(--teal);margin:22px 0 8px;font-weight:600}
+.panel{background:var(--panel);border:1px solid var(--teal);padding:22px 22px 16px;margin:26px 0 16px;position:relative}
+.panel .tag{position:absolute;top:-15px;left:14px;background:var(--mint);color:var(--mintText);font-weight:600;padding:1px 12px;font-size:15px;border:1px solid var(--teal)}
+.panel.peach{background:var(--peach);border-color:#c98a5a}
+.panel.peach .tag{background:#fff;color:#8a4b1e}
+.panel p:last-child,.panel ul:last-child{margin-bottom:0}
+mark{background:var(--hl);color:inherit;padding:0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;background:#fff;margin:10px 0}
+th,td{border:1px solid var(--teal);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--panel);text-align:center;color:var(--navy);font-weight:600}
+.scroll{overflow-x:auto}
+ul{padding-left:24px}li{margin:6px 0}
+figure{margin:22px 0;padding:0}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);margin-top:6px;text-align:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0}
+.card{border:1px solid var(--teal);background:#fff;padding:14px 16px}
+.card b{display:block;color:var(--navy);margin-bottom:4px}
+.steps{counter-reset:s;padding-left:0;list-style:none}
+.steps li{counter-increment:s;position:relative;padding-left:46px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;border:2px solid var(--navy);background:var(--hl);color:var(--navy);font-weight:600;text-align:center;line-height:30px;font-size:16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 16px}
+.set{padding:26px 20px 14px;position:relative;background:#fff}
+.set .big{position:absolute;top:-16px;left:14px;font-weight:700;font-size:17px;padding:2px 14px}
+.set h4{margin:0 0 6px;font-size:21px;color:var(--navy);font-weight:600}
+.set code{font-family:inherit;background:#fff;border:1px solid var(--navy);padding:0 8px;font-weight:600}
+.set.look{border:2px dashed var(--navy);background:var(--grey)}.set.look .big{background:var(--navy);color:#fff}
+.set.real{border:3px solid #1b5e3a;background:var(--mint)}.set.real .big{background:#1b5e3a;color:#fff}
+.set ul{margin:6px 0 0}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--teal);margin-top:40px;padding:14px 0;font-size:14px;color:var(--muted)}
+.small{font-size:14px;color:var(--muted)}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.grid2,.cards{grid-template-columns:1fr}.hero h1{font-size:27px}}
+@media print{nav.top{position:static}body{font-size:15px}}
+
+.lists{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}
+.list{background:var(--panel);border:1px solid var(--teal);padding:12px 12px 8px;margin:0}
+.list h2{font-size:17px;border:0;padding:0;margin:0 0 8px;color:var(--navy)}
+a.card{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--navy);padding:9px 11px;margin:8px 0;font-size:15px;line-height:1.5}
+a.card:hover{background:var(--hl)}
+.meta{font-size:12.5px;color:var(--mintText);background:var(--mint);display:block;width:max-content;max-width:100%;padding:0 8px;margin-bottom:4px}
+.empty{color:var(--muted);font-size:13.5px}
+.chips span{display:inline-block;border:1px solid var(--teal);background:#fff;padding:1px 12px;margin:0 8px 6px 0;font-size:15px}
+article{border:1px solid var(--teal);background:#fff;padding:18px 22px;margin:22px 0;scroll-margin-top:70px}
+article h2{font-size:21px;margin-bottom:6px}article h3{margin:14px 0 6px;font-size:16px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.75 'Prompt',system-ui,sans-serif;background:var(--panel);border-left:4px solid var(--teal);padding:12px 16px;margin:6px 0}
+a.btn{display:inline-block;background:#1b5e3a;color:#fff;text-decoration:none;padding:10px 22px;font-weight:600;font-size:18px;border:2px solid var(--navy)}
+a.btn:hover{background:var(--navy)}
+iframe{display:block;border:1px solid var(--teal);background:#fff;width:100%}
+section{scroll-margin-top:70px}
+@media(max-width:1000px){.lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.lists{grid-template-columns:1fr}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<filter id="sk" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter>
+<symbol id="chibi" viewBox="0 0 100 130">
+ <g stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M30 128 v-30 q0-22 20-22 q20 0 20 22 v30 z" fill="var(--shirt,#FFE1C9)"/>
+  <path d="M30 100 l-9 20" fill="none"/><path d="M70 100 l9 20" fill="none"/>
+  <circle cx="50" cy="48" r="32" fill="#FFF4EC"/>
+  <path d="M18 46 q4-34 32-34 q28 0 32 34 q-8-10-20-12 q-12 2-24 0 q-12 2-20 12z" fill="#1f3a5f"/>
+  <circle cx="39" cy="54" r="2.6" fill="#1f3a5f" stroke="none"/><circle cx="61" cy="54" r="2.6" fill="#1f3a5f" stroke="none"/>
+  <path d="M44 66 q6 5 12 0" fill="none"/>
+ </g>
+ <circle cx="31" cy="62" r="5" fill="#F7B8B8" opacity=".8"/><circle cx="69" cy="62" r="5" fill="#F7B8B8" opacity=".8"/>
+</symbol>
+<symbol id="doc" viewBox="0 0 80 100">
+ <path d="M8 6 h46 l18 18 v70 h-64 z" fill="var(--doc,#fff)" stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round"/>
+ <path d="M54 6 v18 h18" fill="none" stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round"/>
+ <path d="M20 44 h40 M20 58 h40 M20 72 h28" stroke="#1f3a5f" stroke-width="2.6" stroke-linecap="round" opacity=".6"/>
+</symbol>
+<symbol id="board" viewBox="0 0 120 90">
+ <rect x="4" y="4" width="112" height="82" fill="#fff" stroke="#1f3a5f" stroke-width="2.6"/>
+ <rect x="12" y="14" width="28" height="60" fill="#DCE6F0" stroke="#1f3a5f" stroke-width="2"/>
+ <rect x="46" y="14" width="28" height="60" fill="#FFE1C9" stroke="#1f3a5f" stroke-width="2"/>
+ <rect x="80" y="14" width="28" height="60" fill="#CFEFD9" stroke="#1f3a5f" stroke-width="2"/>
+ <rect x="16" y="20" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/><rect x="16" y="34" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/>
+ <rect x="50" y="20" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/>
+ <rect x="84" y="20" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/><rect x="84" y="34" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/><rect x="84" y="48" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/>
+</symbol>
+<symbol id="folder" viewBox="0 0 100 80">
+ <path d="M6 16 h30 l8 8 h50 v50 h-88 z" fill="#FFE1C9" stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round"/>
+ <path d="M6 34 h88" stroke="#1f3a5f" stroke-width="2.6"/>
+</symbol>
+<symbol id="clock" viewBox="0 0 80 80">
+ <circle cx="40" cy="40" r="33" fill="#fff" stroke="#1f3a5f" stroke-width="2.6"/>
+ <path d="M40 18 v22 l14 8" fill="none" stroke="#1f3a5f" stroke-width="2.8" stroke-linecap="round"/>
+</symbol>
+<symbol id="arrow" viewBox="0 0 70 50"><path d="M4 16 h36 v-12 l26 21 l-26 21 v-12 h-36 z" fill="#1f3a5f"/></symbol>
+<symbol id="star" viewBox="0 0 40 40"><path d="M20 3 l5 11 12 1 -9 8 3 12 -11-6 -11 6 3-12 -9-8 12-1z" fill="#FFD66B" stroke="#1f3a5f" stroke-width="2" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<nav class="top"><div class="in"><span class="brand">TGR2026 Trello Kit</span><a href="../index.html">หน้ารวม Kit</a><a href="START_HERE.html" class="cur">เริ่มที่นี่</a><a href="BOARD_EXAMPLE.html" class="">บอร์ดตัวอย่าง</a><a href="CARD_CATALOG.html" class="">ข้อความการ์ด</a><a href="guides/01_Trello_User_Guide.html" class="">คู่มือ Trello</a><a href="guides/02_Trello_PowerUps_Guide.html" class="">คู่มือ Power-Up</a></div></nav><main><div class="hero"><div><span class="kicker">Trello Kit สำหรับผู้เข้าแข่งขัน</span><h1>ใช้ Trello เป็นกระดาน<br>ติดตามงานของทีม</h1><p class="lead">Trello เป็นเครื่องมือทางเลือกสำหรับ Monitor งานของแต่ละทีม ผู้เข้าแข่งขันยังใช้ Notion หรือ Excel และ MS Word ได้ โดยกรรมการจะแจก Template ให้ในวันแข่งขัน</p></div><figure><svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ทีม 5 คนล้อมบอร์ดติดตามงาน"><use href="#board" x="170" y="20" width="180" height="135" /><use href="#chibi" x="20" y="150" width="90" height="117.0" style="--shirt:#FFE1C9"/><use href="#chibi" x="115" y="150" width="90" height="117.0" style="--shirt:#CFEFD9"/><use href="#chibi" x="210" y="150" width="90" height="117.0" style="--shirt:#DCE6F0"/><use href="#chibi" x="305" y="150" width="90" height="117.0" style="--shirt:#F7D6E0"/><use href="#chibi" x="400" y="150" width="90" height="117.0" style="--shirt:#FFF1B8"/><rect x="150" y="272" width="220" height="26" fill="#d8f3d0"/><text x="260" y="292" font-size="18" font-weight="600" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">ทีมเดียว เห็นสถานะเดียวกัน</text></svg></figure></div><div class="toc"><b>ในหน้านี้</b><a href="#s0">เริ่มใช้ Trello Kit</a><a href="#s1">เปิดดู</a></div><div class="panel peach"><span class="tag">ย้ำ</span>
+<p><b>ของที่ส่งจริง</b> ส่งด้วย <mark>Excel และ MS Word ตาม Template ที่กรรมการจะแจกให้ในวันแข่ง</mark> ผ่านช่องทางและเวลาที่กรรมการประกาศ (ในเอกสารนี้เขียนเวลาเป็น xx.xx น. ไว้ก่อน)</p>
+<p><b>ตัวอย่างใน Kit นี้อาจมีเนื้อหามากกว่าสิ่งที่ต้องส่งจริง</b> ตั้งใจให้เห็นภาพรวมของเครื่องมือบริหารจัดการและติดตามงานที่ทันสมัย ทีมเลือกใช้เท่าที่ช่วยให้ทำงานได้จริง การใช้หรือไม่ใช้ Trello ไม่มีผลต่อคะแนน</p></div><section id="s0"><h2>เริ่มใช้ Trello Kit</h2><p>Trello เป็นเครื่องมือทางเลือกสำหรับ Monitor งานของแต่ละทีม ผู้เข้าแข่งขันยังใช้ Notion หรือ Excel และ MS Word ได้ กรรมการจะให้ Template ในวันแข่งขัน การส่งงานยึดแบบฟอร์ม ช่องทาง และเวลาตามประกาศ</p><p>ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา</p><h3>ทำตามลำดับนี้</h3><ul><li>เปิด BOARD_EXAMPLE.html เพื่อเห็นโครงสร้างบอร์ดตัวอย่าง</li><li>อ่านคู่มือ Trello แล้วสร้าง Board และ Lists ตาม board_setup/LISTS.txt</li><li>สร้างชื่อการ์ดจาก titles_by_list แล้วใส่ Description และ Checklist จาก example_cards</li><li>ดู CARD_CATALOG.html หากต้องการอ่านหรือคัดลอกทั้งหมดในหน้าเดียว</li><li>เริ่มทีมจริงด้วย practice_templates ไม่คัดลอกผลผ่านของตัวอย่าง</li><li>ติดตั้ง Power-Up ตามต้องการ คู่มือแยกตัวฟรีกับ trial ให้แล้ว</li></ul><h3>การส่งงาน</h3><p>เวลาส่งแผน Risk และรายงานใช้ xx.xx น. ไว้ก่อน Template Excel และ MS Word จะได้รับในวันแข่งขัน ใช้บอร์ดเพื่อ Monitor ระหว่างวันแล้วสรุปส่งตามแบบกรรมการ</p><h3>สิ่งที่ไฟล์ชุดนี้ทำให้</h3><p>ให้ตัวอย่างและข้อความสำหรับตั้งค่าบอร์ด ไม่มีการสร้างบอร์ดหรือเชื่อมบัญชี Trello/Power-Up ให้อัตโนมัติ ไม่ต้องใช้ API key หรือสคริปต์เพื่อตั้งค่าตามคู่มือ</p><h3>ข้อความการ์ดมี 2 ชุด ใช้คนละจุดประสงค์</h3><div class="two">
+<div class="set look"><span class="big">👀 ไว้ดูเป็นตัวอย่าง</span><h4><code>example_cards</code></h4><ul><li>การ์ดโรงเรือนสมมติที่กรอกครบแล้ว</li><li>ใช้ดูว่าการ์ดที่ดีเขียนอย่างไร และลองสร้างบอร์ดทดลอง</li><li><b>ห้ามใช้เป็นบอร์ดของทีม</b> และห้ามคัดลอกผลผ่านของตัวอย่าง</li></ul></div>
+<div class="set real"><span class="big">🏁 ไว้ใช้จริงวันแข่ง</span><h4><code>practice_templates</code></h4><ul><li>แบบเปล่าสำหรับงาน Risk Issue Decision Checkpoint และรายงาน</li><li>สร้างบอร์ดของทีมและเตรียม List กับ Label ให้เสร็จก่อนวันแข่ง</li><li><b>วันแข่งคัดลอกแบบเปล่าไปสร้างการ์ดจริง</b> แล้วกรอกด้วยเหตุการณ์ของทีม</li></ul></div></div><figure><svg viewBox="0 0 1000 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Board ตามสถานะ"><rect x="20" y="20" width="176" height="200" fill="#DCE6F0" stroke="#1f3a5f" stroke-width="2.4" filter="url(#sk)"/><text x="108" y="50" font-size="17" font-weight="600" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">ยังไม่เริ่ม</text><rect x="32" y="66" width="152" height="38" fill="#fff" stroke="#1f3a5f" stroke-width="1.8"/><text x="108" y="90" font-size="14" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">T06 inference</text><rect x="32" y="114" width="152" height="38" fill="#fff" stroke="#1f3a5f" stroke-width="1.8"/><text x="108" y="138" font-size="14" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">T08 กฎแจ้งเตือน</text><rect x="216" y="20" width="176" height="200" fill="#FFF1B8" stroke="#1f3a5f" stroke-width="2.4" filter="url(#sk)"/><text x="304" y="50" font-size="17" font-weight="600" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">กำลังทำ</text><rect x="228" y="66" width="152" height="38" fill="#fff" stroke="#1f3a5f" stroke-width="1.8"/><text x="304" y="90" font-size="14" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">T05 Train โมเดล</text><rect x="412" y="20" width="176" height="200" fill="#F7D6E0" stroke="#1f3a5f" stroke-width="2.4" filter="url(#sk)"/><text x="500" y="50" font-size="17" font-weight="600" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">ติดขัด</text><rect x="424" y="66" width="152" height="38" fill="#fff" stroke="#1f3a5f" stroke-width="1.8"/><text x="500" y="90" font-size="14" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">T02 อ่านค่า  I01</text><rect x="608" y="20" width="176" height="200" fill="#FFE1C9" stroke="#1f3a5f" stroke-width="2.4" filter="url(#sk)"/><text x="696" y="50" font-size="17" font-weight="600" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">เสร็จรอตรวจ</text><rect x="620" y="66" width="152" height="38" fill="#fff" stroke="#1f3a5f" stroke-width="1.8"/><text x="696" y="90" font-size="14" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">T07 Dashboard</text><rect x="804" y="20" width="176" height="200" fill="#CFEFD9" stroke="#1f3a5f" stroke-width="2.4" filter="url(#sk)"/><text x="892" y="50" font-size="17" font-weight="600" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">Done</text><rect x="816" y="66" width="152" height="38" fill="#fff" stroke="#1f3a5f" stroke-width="1.8"/><text x="892" y="90" font-size="14" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">T01 contract</text><rect x="816" y="114" width="152" height="38" fill="#fff" stroke="#1f3a5f" stroke-width="1.8"/><text x="892" y="138" font-size="14" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">T04 ชุดข้อมูล</text><path d="M700 112 q75 75 150 0" fill="none" stroke="#1f3a5f" stroke-width="2.4" stroke-dasharray="6 6"/><path d="M850 112 l-8 12 M850 112 l-12-4" fill="none" stroke="#1f3a5f" stroke-width="2.4"/><text x="775" y="178" font-size="14" font-weight="600" text-anchor="middle" fill="#2F6F73" style="font-family:'Prompt',sans-serif">ผ่าน AC และ DoD แล้ว</text><text x="775" y="198" font-size="14" font-weight="600" text-anchor="middle" fill="#2F6F73" style="font-family:'Prompt',sans-serif">ค่อยลากไป Done</text><text x="500" y="248" font-size="16" font-weight="400" text-anchor="middle" fill="#5b6b7b" style="font-family:'Prompt',sans-serif">ลากการ์ดเปลี่ยนสถานะ แต่การตรวจ AC และ DoD ต้องทำและบันทึกแยก</text></svg></figure><figure><svg viewBox="0 0 1000 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="เส้นทางของงานในหนึ่งรอบ"><rect x="20" y="20" width="270" height="290" fill="#DCE6F0" stroke="#1f3a5f" stroke-width="2.4" filter="url(#sk)"/><rect x="34" y="34" width="36" height="36" fill="#1b5e3a"/><text x="52" y="60" font-size="22" font-weight="700" text-anchor="middle" fill="#fff" style="font-family:'Prompt',sans-serif">1</text><text x="170" y="62" font-size="24" font-weight="600" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">ระหว่างวัน</text><use href="#board" x="115" y="80" width="80" height="60" /><text x="155" y="190" font-size="17" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">ติดตามงานด้วยเครื่องมือที่ทีมถนัด</text><text x="155" y="220" font-size="17" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">Notion  Trello  กระดาษ  หรือ Excel</text><text x="155" y="250" font-size="17" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">จดเหตุการณ์จริง อ้างรหัส T R I D</text><rect x="365" y="20" width="270" height="290" fill="#FFE1C9" stroke="#1f3a5f" stroke-width="2.4" filter="url(#sk)"/><rect x="379" y="34" width="36" height="36" fill="#1b5e3a"/><text x="397" y="60" font-size="22" font-weight="700" text-anchor="middle" fill="#fff" style="font-family:'Prompt',sans-serif">2</text><text x="515" y="62" font-size="24" font-weight="600" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">ก่อนส่ง</text><use href="#doc" x="460" y="80" width="80" height="80" /><text x="500" y="190" font-size="17" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">คัดลอกสิ่งที่เกิดจริงลง Template</text><text x="500" y="220" font-size="17" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">Excel แผนงานและ Risk</text><text x="500" y="250" font-size="17" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">MS Word รายงานผล</text><rect x="710" y="20" width="270" height="290" fill="#CFEFD9" stroke="#1f3a5f" stroke-width="2.4" filter="url(#sk)"/><rect x="724" y="34" width="36" height="36" fill="#1b5e3a"/><text x="742" y="60" font-size="22" font-weight="700" text-anchor="middle" fill="#fff" style="font-family:'Prompt',sans-serif">3</text><text x="860" y="62" font-size="24" font-weight="600" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">ส่งงาน</text><use href="#clock" x="805" y="80" width="80" height="80" /><text x="845" y="190" font-size="17" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">ส่งตามช่องทางและเวลา xx.xx</text><text x="845" y="220" font-size="17" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">ที่กรรมการประกาศ</text><text x="845" y="250" font-size="17" font-weight="400" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">ประเมินจากไฟล์ที่ส่งเท่านั้น</text><use href="#arrow" x="296" y="140" width="66" height="48" /><use href="#arrow" x="641" y="140" width="66" height="48" /></svg><figcaption>ไม่ว่าจะใช้เครื่องมือไหนระหว่างวัน ปลายทางคือไฟล์ Excel และ Word ตาม Template เสมอ</figcaption></figure></section><section id="s1"><h2>เปิดดู</h2><p><a href="BOARD_EXAMPLE.html">ภาพบอร์ดตัวอย่าง</a>  <a href="CARD_CATALOG.html">ข้อความการ์ดทั้งหมด</a></p><p><a href="guides/01_Trello_User_Guide.html">คู่มือ Trello</a>  <a href="guides/02_Trello_PowerUps_Guide.html">คู่มือ Power-Up</a></p></section></main>
+<footer><div>TESA Top Gun Rally 2026  Kit ตัวอย่างเครื่องมือติดตามงานของทีม  ข้อมูลโรงเรือนทั้งหมดเป็นสถานการณ์สมมติสำหรับเรียนรู้</div></footer></body></html>

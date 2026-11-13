@@ -1,0 +1,611 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ข้อความการ์ดตัวอย่าง Trello Kit</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1f3a5f;--teal:#2F6F73;--panel:#EEF6FA;--mint:#CFEFD9;--mintText:#1b5e3a;--peach:#FFE1C9;--hl:#d8f3d0;--grey:#DCE6F0;--ink:#1e2a38;--muted:#5b6b7b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font-family:'Prompt','Sarabun',system-ui,sans-serif;font-size:17px;line-height:1.8}
+a{color:var(--teal)}
+nav.top{border-bottom:1px solid var(--teal);background:#fff;position:sticky;top:0;z-index:5}
+nav.top .in{max-width:1040px;margin:auto;padding:10px 20px;display:flex;gap:6px 22px;flex-wrap:wrap;align-items:center}
+nav.top .brand{font-weight:600;color:var(--navy);margin-right:auto}
+nav.top a{text-decoration:none;color:var(--navy);padding:4px 0;border-bottom:2px solid transparent}
+nav.top a.cur{border-bottom-color:var(--teal);color:var(--teal)}
+main{max-width:1040px;margin:auto;padding:0 20px 60px}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:center;padding:36px 0 10px}
+.hero h1{font-size:34px;line-height:1.3;margin:0 0 10px;color:var(--navy);font-weight:600}
+.hero p.lead{font-size:19px;margin:0 0 8px}
+.hero .kicker{display:inline-block;background:var(--mint);color:var(--mintText);padding:2px 12px;font-size:14px;letter-spacing:.3px;margin-bottom:12px}
+.toc{border:1px solid var(--teal);background:var(--panel);padding:12px 18px;margin:14px 0 26px;font-size:15px}
+.toc b{color:var(--navy);margin-right:10px}
+.toc a{display:inline-block;margin:2px 14px 2px 0;text-decoration:none;color:var(--navy)}
+.toc a:before{content:"• ";color:var(--teal)}
+section{margin:34px 0}
+h2{font-size:24px;color:var(--navy);margin:0 0 14px;font-weight:600;padding-left:12px;border-left:5px solid var(--teal)}
+h3{font-size:19px;color:var(--teal);margin:22px 0 8px;font-weight:600}
+.panel{background:var(--panel);border:1px solid var(--teal);padding:22px 22px 16px;margin:26px 0 16px;position:relative}
+.panel .tag{position:absolute;top:-15px;left:14px;background:var(--mint);color:var(--mintText);font-weight:600;padding:1px 12px;font-size:15px;border:1px solid var(--teal)}
+.panel.peach{background:var(--peach);border-color:#c98a5a}
+.panel.peach .tag{background:#fff;color:#8a4b1e}
+.panel p:last-child,.panel ul:last-child{margin-bottom:0}
+mark{background:var(--hl);color:inherit;padding:0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;background:#fff;margin:10px 0}
+th,td{border:1px solid var(--teal);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--panel);text-align:center;color:var(--navy);font-weight:600}
+.scroll{overflow-x:auto}
+ul{padding-left:24px}li{margin:6px 0}
+figure{margin:22px 0;padding:0}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);margin-top:6px;text-align:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0}
+.card{border:1px solid var(--teal);background:#fff;padding:14px 16px}
+.card b{display:block;color:var(--navy);margin-bottom:4px}
+.steps{counter-reset:s;padding-left:0;list-style:none}
+.steps li{counter-increment:s;position:relative;padding-left:46px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;border:2px solid var(--navy);background:var(--hl);color:var(--navy);font-weight:600;text-align:center;line-height:30px;font-size:16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 16px}
+.set{padding:26px 20px 14px;position:relative;background:#fff}
+.set .big{position:absolute;top:-16px;left:14px;font-weight:700;font-size:17px;padding:2px 14px}
+.set h4{margin:0 0 6px;font-size:21px;color:var(--navy);font-weight:600}
+.set code{font-family:inherit;background:#fff;border:1px solid var(--navy);padding:0 8px;font-weight:600}
+.set.look{border:2px dashed var(--navy);background:var(--grey)}.set.look .big{background:var(--navy);color:#fff}
+.set.real{border:3px solid #1b5e3a;background:var(--mint)}.set.real .big{background:#1b5e3a;color:#fff}
+.set ul{margin:6px 0 0}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--teal);margin-top:40px;padding:14px 0;font-size:14px;color:var(--muted)}
+.small{font-size:14px;color:var(--muted)}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.grid2,.cards{grid-template-columns:1fr}.hero h1{font-size:27px}}
+@media print{nav.top{position:static}body{font-size:15px}}
+
+.lists{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}
+.list{background:var(--panel);border:1px solid var(--teal);padding:12px 12px 8px;margin:0}
+.list h2{font-size:17px;border:0;padding:0;margin:0 0 8px;color:var(--navy)}
+a.card{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--navy);padding:9px 11px;margin:8px 0;font-size:15px;line-height:1.5}
+a.card:hover{background:var(--hl)}
+.meta{font-size:12.5px;color:var(--mintText);background:var(--mint);display:block;width:max-content;max-width:100%;padding:0 8px;margin-bottom:4px}
+.empty{color:var(--muted);font-size:13.5px}
+.chips span{display:inline-block;border:1px solid var(--teal);background:#fff;padding:1px 12px;margin:0 8px 6px 0;font-size:15px}
+article{border:1px solid var(--teal);background:#fff;padding:18px 22px;margin:22px 0;scroll-margin-top:70px}
+article h2{font-size:21px;margin-bottom:6px}article h3{margin:14px 0 6px;font-size:16px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.75 'Prompt',system-ui,sans-serif;background:var(--panel);border-left:4px solid var(--teal);padding:12px 16px;margin:6px 0}
+a.btn{display:inline-block;background:#1b5e3a;color:#fff;text-decoration:none;padding:10px 22px;font-weight:600;font-size:18px;border:2px solid var(--navy)}
+a.btn:hover{background:var(--navy)}
+iframe{display:block;border:1px solid var(--teal);background:#fff;width:100%}
+section{scroll-margin-top:70px}
+@media(max-width:1000px){.lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.lists{grid-template-columns:1fr}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<filter id="sk" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter>
+<symbol id="chibi" viewBox="0 0 100 130">
+ <g stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M30 128 v-30 q0-22 20-22 q20 0 20 22 v30 z" fill="var(--shirt,#FFE1C9)"/>
+  <path d="M30 100 l-9 20" fill="none"/><path d="M70 100 l9 20" fill="none"/>
+  <circle cx="50" cy="48" r="32" fill="#FFF4EC"/>
+  <path d="M18 46 q4-34 32-34 q28 0 32 34 q-8-10-20-12 q-12 2-24 0 q-12 2-20 12z" fill="#1f3a5f"/>
+  <circle cx="39" cy="54" r="2.6" fill="#1f3a5f" stroke="none"/><circle cx="61" cy="54" r="2.6" fill="#1f3a5f" stroke="none"/>
+  <path d="M44 66 q6 5 12 0" fill="none"/>
+ </g>
+ <circle cx="31" cy="62" r="5" fill="#F7B8B8" opacity=".8"/><circle cx="69" cy="62" r="5" fill="#F7B8B8" opacity=".8"/>
+</symbol>
+<symbol id="doc" viewBox="0 0 80 100">
+ <path d="M8 6 h46 l18 18 v70 h-64 z" fill="var(--doc,#fff)" stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round"/>
+ <path d="M54 6 v18 h18" fill="none" stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round"/>
+ <path d="M20 44 h40 M20 58 h40 M20 72 h28" stroke="#1f3a5f" stroke-width="2.6" stroke-linecap="round" opacity=".6"/>
+</symbol>
+<symbol id="board" viewBox="0 0 120 90">
+ <rect x="4" y="4" width="112" height="82" fill="#fff" stroke="#1f3a5f" stroke-width="2.6"/>
+ <rect x="12" y="14" width="28" height="60" fill="#DCE6F0" stroke="#1f3a5f" stroke-width="2"/>
+ <rect x="46" y="14" width="28" height="60" fill="#FFE1C9" stroke="#1f3a5f" stroke-width="2"/>
+ <rect x="80" y="14" width="28" height="60" fill="#CFEFD9" stroke="#1f3a5f" stroke-width="2"/>
+ <rect x="16" y="20" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/><rect x="16" y="34" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/>
+ <rect x="50" y="20" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/>
+ <rect x="84" y="20" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/><rect x="84" y="34" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/><rect x="84" y="48" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/>
+</symbol>
+<symbol id="folder" viewBox="0 0 100 80">
+ <path d="M6 16 h30 l8 8 h50 v50 h-88 z" fill="#FFE1C9" stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round"/>
+ <path d="M6 34 h88" stroke="#1f3a5f" stroke-width="2.6"/>
+</symbol>
+<symbol id="clock" viewBox="0 0 80 80">
+ <circle cx="40" cy="40" r="33" fill="#fff" stroke="#1f3a5f" stroke-width="2.6"/>
+ <path d="M40 18 v22 l14 8" fill="none" stroke="#1f3a5f" stroke-width="2.8" stroke-linecap="round"/>
+</symbol>
+<symbol id="arrow" viewBox="0 0 70 50"><path d="M4 16 h36 v-12 l26 21 l-26 21 v-12 h-36 z" fill="#1f3a5f"/></symbol>
+<symbol id="star" viewBox="0 0 40 40"><path d="M20 3 l5 11 12 1 -9 8 3 12 -11-6 -11 6 3-12 -9-8 12-1z" fill="#FFD66B" stroke="#1f3a5f" stroke-width="2" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<nav class="top"><div class="in"><span class="brand">TGR2026 Trello Kit</span><a href="../index.html">หน้ารวม Kit</a><a href="START_HERE.html" class="">เริ่มที่นี่</a><a href="BOARD_EXAMPLE.html" class="">บอร์ดตัวอย่าง</a><a href="CARD_CATALOG.html" class="cur">ข้อความการ์ด</a><a href="guides/01_Trello_User_Guide.html" class="">คู่มือ Trello</a><a href="guides/02_Trello_PowerUps_Guide.html" class="">คู่มือ Power-Up</a></div></nav><main><div style="padding-top:30px"><span class="kicker" style="display:inline-block;background:var(--mint);color:var(--mintText);padding:2px 12px;font-size:14px">ข้อความการ์ด</span><h1 style="font-size:30px;color:var(--navy);margin:8px 0;font-weight:600">ข้อความการ์ดตัวอย่าง</h1></div><div class="toc"><b>ไปที่การ์ด</b><a href="#INFO">INFO</a><a href="#TEAM">TEAM</a><a href="#DOD">DOD</a><a href="#LINKS">LINKS</a><a href="#T01">T01</a><a href="#T02">T02</a><a href="#T03">T03</a><a href="#T04">T04</a><a href="#T05">T05</a><a href="#T06">T06</a><a href="#T07">T07</a><a href="#T08">T08</a><a href="#T09">T09</a><a href="#R01">R01</a><a href="#R02">R02</a><a href="#R03">R03</a><a href="#I01">I01</a><a href="#C01">C01</a><a href="#C02">C02</a><a href="#D01">D01</a><a href="#D02">D02</a><a href="#D03">D03</a><a href="#RPT01">RPT01</a><a href="#RPT02">RPT02</a><a href="#RPT03">RPT03</a></div><p>ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา</p><p>คัดลอก Description และรายการ Checklist ตามแต่ละส่วน เปิดไฟล์ txt ใน example_cards ได้เช่นกัน</p><article id="INFO"><h2>เริ่มที่นี่ วิธีใช้บอร์ด</h2><p>List 00 เริ่มที่นี่  Labels ข้อมูล</p><h3>Description</h3><pre>Trello เป็นเครื่องมือทางเลือกสำหรับ Monitor งานของแต่ละทีม ผู้เข้าแข่งขันยังใช้ Notion หรือ Excel และ MS Word ได้ กรรมการจะให้ Template ในวันแข่งขัน การส่งงานยึดแบบฟอร์ม ช่องทาง และเวลาตามประกาศ
+
+ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา
+
+เวลาส่งแผนและ Risk xx.xx น.
+เวลาส่งรายงาน xx.xx น.
+รอบ 3 ส่งแผน 12 พ.ย. xx.xx น. และรายงาน 12 พ.ย. xx.xx น.
+
+ภาพตัวอย่างเป็นจบรอบแรก งาน Must 7 งาน Done; T06 กำลังทำ; T08 รอตรวจ
+
+Trello Free ไม่ได้สร้างบอร์ดจากไฟล์ Kit นี้ให้อัตโนมัติ ใช้คู่มือและข้อความคัดลอกเพื่อตั้งค่าบอร์ด
+หากเริ่มงานจริงให้ใช้ practice_templates และกรอกผลงานจริง</pre></article><article id="TEAM"><h2>ทีม T00 และบทบาท</h2><p>List 00 เริ่มที่นี่  Labels ข้อมูล</p><h3>Description</h3><pre>สมาชิก ก  -  ฮาร์ดแวร์และเซ็นเซอร์  -  T02 T03
+สมาชิก ข  -  โมเดลและ Edge AI  -  T04 T05 T06
+สมาชิก ค  -  Dashboard และการแจ้งเตือน  -  T07 T08
+สมาชิก ง  -  ผู้รวมระบบ  -  T01 T09 และช่วย I01
+สมาชิก จ  -  PM และการนำเสนอ  -  ติดตามแผน รายงานและตรวจ T09
+
+ชื่อสมาชิกเป็นตัวอย่าง ให้เลือก Members จริงบนการ์ดด้วยตนเอง</pre></article><article id="DOD"><h2>ข้อตกลง Definition of Done</h2><p>List 00 เริ่มที่นี่  Labels ข้อมูล</p><h3>Description</h3><pre>ตกลงร่วมกันก่อนทำงาน และบันทึกวันเวลาและผู้ร่วมตกลง
+
+1. งานโค้ดอยู่ใน Git และระบุ Task ID — เปิด commit และไฟล์ที่เปลี่ยน
+2. มีคนที่ไม่ได้ทำงานนั้นตรวจ AC — ผลตรวจระบุผู้ตรวจและผลที่ได้
+3. เก็บหลักฐานและอ้าง Evidence ID — เปิดไฟล์ทดสอบและระบุจุดที่ยืนยัน
+4. ถ้า contract เปลี่ยนแจ้งทีมและอัปเดต — ตรวจเวอร์ชัน contract และบันทึกแจ้ง
+
+Checklist ใน Kit แสดงเงื่อนไขที่ต้องตรวจ ไม่ได้ยืนยันว่ามีหลักฐานจริง</pre></article><article id="LINKS"><h2>ช่องทางส่งงานและหลักฐาน</h2><p>List 00 เริ่มที่นี่  Labels ข้อมูล</p><h3>Description</h3><pre>Template Excel และ MS Word ของกรรมการ: รอวันแข่งขัน
+ช่องทางส่งงาน: รอประกาศ
+โฟลเดอร์หลักฐานของทีม: ทีมเติม
+Git repository: ทีมเติม
+แผนฉบับส่ง: ทีมเติม
+Risk ฉบับส่ง: ทีมเติม
+
+เวลาส่งงาน xx.xx น.
+ตรวจสิทธิ์เปิดไฟล์ปลายทางก่อนส่ง</pre></article><article id="T01"><h2>T01 ตกลง interface contract</h2><p>List 05 Done  Labels งาน, Must, ตัวอย่าง</p><h3>Description</h3><pre>ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา
+
+ทีม: T00
+รอบ: ตัวอย่าง
+Owner ตัวอย่าง: สมาชิก ง
+Priority: Must
+งานที่ต้องรอ: ไม่มี
+เริ่มตามแผน: 2026-11-12 13:00
+สิ้นสุดตามแผน: 2026-11-12 13:30
+เริ่มจริง: 2026-11-12 13:00
+สิ้นสุดจริง: 2026-11-12 13:20
+
+AC ของงานนี้
+ครบ topic ฟิลด์ หน่วยและตัวอย่าง JSON ทุกสาย
+
+สถานะในสถานการณ์สมมติ: Done
+ความคืบหน้าโดยทีมประมาณ: 100%
+ผล AC ในสถานการณ์สมมติ: ผ่าน
+ผล DoD ในสถานการณ์สมมติ: ผ่าน
+ผู้ตรวจตัวอย่าง: สมาชิก จ
+
+หลักฐานตัวอย่าง: E01 contract.md
+URL หลักฐานจริง: ทีมเติมเมื่อใช้จริง
+จุดที่ต้องดู: ทีมระบุหน้า แถว หรือช่วงเวลา
+ข้อจำกัด: ไม่มีข้อจำกัดเพิ่มเติมในสถานการณ์สมมติ
+
+เวลาส่งงานตามประกาศ: xx.xx น.
+วันเวลางานด้านบนเป็นเหตุการณ์สมมติ ไม่ใช่กำหนดส่งกรรมการ</pre><h3>Checklist AC ตรวจรับงาน</h3><pre>ครบ topic ฟิลด์ หน่วยและตัวอย่าง JSON ทุกสาย</pre><h3>Checklist DoD ข้อตกลงทีม</h3><pre>งานโค้ดอยู่ใน Git และระบุ Task ID
+มีคนที่ไม่ได้ทำงานนั้นตรวจ AC
+เก็บหลักฐานและอ้าง Evidence ID
+ถ้า contract เปลี่ยนแจ้งทีมและอัปเดต</pre></article><article id="T02"><h2>T02 อ่านค่าความชื้นและอุณหภูมิ</h2><p>List 05 Done  Labels งาน, Must, ตัวอย่าง</p><h3>Description</h3><pre>ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา
+
+ทีม: T00
+รอบ: ตัวอย่าง
+Owner ตัวอย่าง: สมาชิก ก
+Priority: Must
+งานที่ต้องรอ: T01
+เริ่มตามแผน: 2026-11-12 13:30
+สิ้นสุดตามแผน: 2026-11-12 14:45
+เริ่มจริง: 2026-11-12 13:20
+สิ้นสุดจริง: 2026-11-12 14:40
+
+AC ของงานนี้
+เรียงค่าดินแห้ง ดินชื้น น้ำถูก; ดินเดียวกัน 1 นาทีต่างไม่เกิน 3 จุดเปอร์เซ็นต์
+
+สถานะในสถานการณ์สมมติ: Done
+ความคืบหน้าโดยทีมประมาณ: 100%
+ผล AC ในสถานการณ์สมมติ: ผ่าน
+ผล DoD ในสถานการณ์สมมติ: ผ่าน
+ผู้ตรวจตัวอย่าง: สมาชิก ง
+
+หลักฐานตัวอย่าง: E02 T02_sensor_test.csv
+URL หลักฐานจริง: ทีมเติมเมื่อใช้จริง
+จุดที่ต้องดู: ทีมระบุหน้า แถว หรือช่วงเวลา
+ข้อจำกัด: ช้ากว่าแผน 20 นาทีจาก I01
+
+เวลาส่งงานตามประกาศ: xx.xx น.
+วันเวลางานด้านบนเป็นเหตุการณ์สมมติ ไม่ใช่กำหนดส่งกรรมการ</pre><h3>Checklist AC ตรวจรับงาน</h3><pre>เรียงค่าดินแห้ง ดินชื้น น้ำถูก; ดินเดียวกัน 1 นาทีต่างไม่เกิน 3 จุดเปอร์เซ็นต์</pre><h3>Checklist DoD ข้อตกลงทีม</h3><pre>งานโค้ดอยู่ใน Git และระบุ Task ID
+มีคนที่ไม่ได้ทำงานนั้นตรวจ AC
+เก็บหลักฐานและอ้าง Evidence ID
+ถ้า contract เปลี่ยนแจ้งทีมและอัปเดต</pre><h3>Checklist งานที่ต้องรอก่อน</h3><pre>T01</pre></article><article id="T03"><h2>T03 ส่งค่าเซ็นเซอร์ผ่าน MQTT</h2><p>List 05 Done  Labels งาน, Must, ตัวอย่าง</p><h3>Description</h3><pre>ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา
+
+ทีม: T00
+รอบ: ตัวอย่าง
+Owner ตัวอย่าง: สมาชิก ก
+Priority: Must
+งานที่ต้องรอ: T02
+เริ่มตามแผน: 2026-11-12 14:45
+สิ้นสุดตามแผน: 2026-11-12 15:45
+เริ่มจริง: 2026-11-12 14:40
+สิ้นสุดจริง: 2026-11-12 15:30
+
+AC ของงานนี้
+subscribe ต่อเนื่อง 5 นาทีไม่หลุด ฟิลด์ตรง contract
+
+สถานะในสถานการณ์สมมติ: Done
+ความคืบหน้าโดยทีมประมาณ: 100%
+ผล AC ในสถานการณ์สมมติ: ผ่าน
+ผล DoD ในสถานการณ์สมมติ: ผ่าน
+ผู้ตรวจตัวอย่าง: สมาชิก ง
+
+หลักฐานตัวอย่าง: E03 T03_mqtt_log.txt
+URL หลักฐานจริง: ทีมเติมเมื่อใช้จริง
+จุดที่ต้องดู: ทีมระบุหน้า แถว หรือช่วงเวลา
+ข้อจำกัด: ขยับเวลาเริ่มตาม T02 โดย D02
+
+เวลาส่งงานตามประกาศ: xx.xx น.
+วันเวลางานด้านบนเป็นเหตุการณ์สมมติ ไม่ใช่กำหนดส่งกรรมการ</pre><h3>Checklist AC ตรวจรับงาน</h3><pre>subscribe ต่อเนื่อง 5 นาทีไม่หลุด ฟิลด์ตรง contract</pre><h3>Checklist DoD ข้อตกลงทีม</h3><pre>งานโค้ดอยู่ใน Git และระบุ Task ID
+มีคนที่ไม่ได้ทำงานนั้นตรวจ AC
+เก็บหลักฐานและอ้าง Evidence ID
+ถ้า contract เปลี่ยนแจ้งทีมและอัปเดต</pre><h3>Checklist งานที่ต้องรอก่อน</h3><pre>T02</pre></article><article id="T04"><h2>T04 จัดภาพใบปกติและใบเหลือง</h2><p>List 05 Done  Labels งาน, Must, ตัวอย่าง</p><h3>Description</h3><pre>ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา
+
+ทีม: T00
+รอบ: ตัวอย่าง
+Owner ตัวอย่าง: สมาชิก ข
+Priority: Must
+งานที่ต้องรอ: T01
+เริ่มตามแผน: 2026-11-12 13:30
+สิ้นสุดตามแผน: 2026-11-12 14:15
+เริ่มจริง: 2026-11-12 13:20
+สิ้นสุดจริง: 2026-11-12 14:20
+
+AC ของงานนี้
+รวม 100 ภาพ คลาสละ 50 แยก train/test โดยไม่ใช้ภาพซ้ำ
+
+สถานะในสถานการณ์สมมติ: Done
+ความคืบหน้าโดยทีมประมาณ: 100%
+ผล AC ในสถานการณ์สมมติ: ผ่าน
+ผล DoD ในสถานการณ์สมมติ: ผ่าน
+ผู้ตรวจตัวอย่าง: สมาชิก ง
+
+หลักฐานตัวอย่าง: E04 T04_data_split.csv
+URL หลักฐานจริง: ทีมเติมเมื่อใช้จริง
+จุดที่ต้องดู: ทีมระบุหน้า แถว หรือช่วงเวลา
+ข้อจำกัด: ไม่มีข้อจำกัดเพิ่มเติมในสถานการณ์สมมติ
+
+เวลาส่งงานตามประกาศ: xx.xx น.
+วันเวลางานด้านบนเป็นเหตุการณ์สมมติ ไม่ใช่กำหนดส่งกรรมการ</pre><h3>Checklist AC ตรวจรับงาน</h3><pre>รวม 100 ภาพ คลาสละ 50 แยก train/test โดยไม่ใช้ภาพซ้ำ</pre><h3>Checklist DoD ข้อตกลงทีม</h3><pre>งานโค้ดอยู่ใน Git และระบุ Task ID
+มีคนที่ไม่ได้ทำงานนั้นตรวจ AC
+เก็บหลักฐานและอ้าง Evidence ID
+ถ้า contract เปลี่ยนแจ้งทีมและอัปเดต</pre><h3>Checklist งานที่ต้องรอก่อน</h3><pre>T01</pre></article><article id="T05"><h2>T05 ฝึกโมเดลบน Colab</h2><p>List 05 Done  Labels งาน, Must, ตัวอย่าง</p><h3>Description</h3><pre>ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา
+
+ทีม: T00
+รอบ: ตัวอย่าง
+Owner ตัวอย่าง: สมาชิก ข
+Priority: Must
+งานที่ต้องรอ: T04
+เริ่มตามแผน: 2026-11-12 14:15
+สิ้นสุดตามแผน: 2026-11-12 15:15
+เริ่มจริง: 2026-11-12 14:20
+สิ้นสุดจริง: 2026-11-12 15:20
+
+AC ของงานนี้
+test accuracy อย่างน้อย 80% เก็บ confusion matrix และ checkpoint
+
+สถานะในสถานการณ์สมมติ: Done
+ความคืบหน้าโดยทีมประมาณ: 100%
+ผล AC ในสถานการณ์สมมติ: ผ่าน
+ผล DoD ในสถานการณ์สมมติ: ผ่าน
+ผู้ตรวจตัวอย่าง: สมาชิก ง
+
+หลักฐานตัวอย่าง: E05 T05_test_results.png
+URL หลักฐานจริง: ทีมเติมเมื่อใช้จริง
+จุดที่ต้องดู: ทีมระบุหน้า แถว หรือช่วงเวลา
+ข้อจำกัด: เกณฑ์ในตัวอย่าง ไม่ใช่ข้อกำหนดแข่งขัน
+
+เวลาส่งงานตามประกาศ: xx.xx น.
+วันเวลางานด้านบนเป็นเหตุการณ์สมมติ ไม่ใช่กำหนดส่งกรรมการ</pre><h3>Checklist AC ตรวจรับงาน</h3><pre>test accuracy อย่างน้อย 80% เก็บ confusion matrix และ checkpoint</pre><h3>Checklist DoD ข้อตกลงทีม</h3><pre>งานโค้ดอยู่ใน Git และระบุ Task ID
+มีคนที่ไม่ได้ทำงานนั้นตรวจ AC
+เก็บหลักฐานและอ้าง Evidence ID
+ถ้า contract เปลี่ยนแจ้งทีมและอัปเดต</pre><h3>Checklist งานที่ต้องรอก่อน</h3><pre>T04</pre></article><article id="T06"><h2>T06 รัน inference บน Pi</h2><p>List 02 กำลังทำ  Labels งาน, Should, ตัวอย่าง</p><h3>Description</h3><pre>ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา
+
+ทีม: T00
+รอบ: ตัวอย่าง
+Owner ตัวอย่าง: สมาชิก ข
+Priority: Should
+งานที่ต้องรอ: T05
+เริ่มตามแผน: 2026-11-12 15:15
+สิ้นสุดตามแผน: 2026-11-12 15:45
+เริ่มจริง: 2026-11-12 15:20
+สิ้นสุดจริง: ยังไม่กรอกเพราะยังไม่ Done
+
+AC ของงานนี้
+เวลาต่อภาพไม่เกิน 1 วินาที JSON ตรง contract
+
+สถานะในสถานการณ์สมมติ: กำลังทำ
+ความคืบหน้าโดยทีมประมาณ: 50%
+ผล AC ในสถานการณ์สมมติ: ยังไม่ตรวจ
+ผล DoD ในสถานการณ์สมมติ: ยังไม่ตรวจ
+ผู้ตรวจตัวอย่าง: ยังไม่มี
+
+หลักฐานตัวอย่าง: ยังไม่มี 
+URL หลักฐานจริง: ทีมเติมเมื่อใช้จริง
+จุดที่ต้องดู: ทีมระบุหน้า แถว หรือช่วงเวลา
+ข้อจำกัด: เลื่อนต่อรอบหน้า D03 ยังไม่ยืนยัน end-to-end
+
+เวลาส่งงานตามประกาศ: xx.xx น.
+วันเวลางานด้านบนเป็นเหตุการณ์สมมติ ไม่ใช่กำหนดส่งกรรมการ</pre><h3>Checklist AC ตรวจรับงาน</h3><pre>เวลาต่อภาพไม่เกิน 1 วินาที JSON ตรง contract</pre><h3>Checklist DoD ข้อตกลงทีม</h3><pre>งานโค้ดอยู่ใน Git และระบุ Task ID
+มีคนที่ไม่ได้ทำงานนั้นตรวจ AC
+เก็บหลักฐานและอ้าง Evidence ID
+ถ้า contract เปลี่ยนแจ้งทีมและอัปเดต</pre><h3>Checklist งานที่ต้องรอก่อน</h3><pre>T05</pre></article><article id="T07"><h2>T07 ทำ Dashboard รับ MQTT และ JSON</h2><p>List 05 Done  Labels งาน, Must, ตัวอย่าง</p><h3>Description</h3><pre>ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา
+
+ทีม: T00
+รอบ: ตัวอย่าง
+Owner ตัวอย่าง: สมาชิก ค
+Priority: Must
+งานที่ต้องรอ: T01
+เริ่มตามแผน: 2026-11-12 13:30
+สิ้นสุดตามแผน: 2026-11-12 15:15
+เริ่มจริง: 2026-11-12 13:20
+สิ้นสุดจริง: 2026-11-12 15:20
+
+AC ของงานนี้
+แสดงค่าล่าสุดภายใน 30 วินาที กราฟย้อนหลัง 10 นาที และอ่าน JSON ตาม contract
+
+สถานะในสถานการณ์สมมติ: Done
+ความคืบหน้าโดยทีมประมาณ: 100%
+ผล AC ในสถานการณ์สมมติ: ผ่าน
+ผล DoD ในสถานการณ์สมมติ: ผ่าน
+ผู้ตรวจตัวอย่าง: สมาชิก ง
+
+หลักฐานตัวอย่าง: E07 T07_mock_test.png
+URL หลักฐานจริง: ทีมเติมเมื่อใช้จริง
+จุดที่ต้องดู: ทีมระบุหน้า แถว หรือช่วงเวลา
+ข้อจำกัด: ทดสอบด้วย mock ก่อน T03 พร้อม ไม่ยืนยัน inference บน Pi
+
+เวลาส่งงานตามประกาศ: xx.xx น.
+วันเวลางานด้านบนเป็นเหตุการณ์สมมติ ไม่ใช่กำหนดส่งกรรมการ</pre><h3>Checklist AC ตรวจรับงาน</h3><pre>แสดงค่าล่าสุดภายใน 30 วินาที กราฟย้อนหลัง 10 นาที และอ่าน JSON ตาม contract</pre><h3>Checklist DoD ข้อตกลงทีม</h3><pre>งานโค้ดอยู่ใน Git และระบุ Task ID
+มีคนที่ไม่ได้ทำงานนั้นตรวจ AC
+เก็บหลักฐานและอ้าง Evidence ID
+ถ้า contract เปลี่ยนแจ้งทีมและอัปเดต</pre><h3>Checklist งานที่ต้องรอก่อน</h3><pre>T01</pre></article><article id="T08"><h2>T08 ทำกฎเตือนความชื้นต่ำ</h2><p>List 04 เสร็จรอตรวจ  Labels งาน, Should, ตัวอย่าง</p><h3>Description</h3><pre>ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา
+
+ทีม: T00
+รอบ: ตัวอย่าง
+Owner ตัวอย่าง: สมาชิก ค
+Priority: Should
+งานที่ต้องรอ: T07
+เริ่มตามแผน: 2026-11-12 15:15
+สิ้นสุดตามแผน: 2026-11-12 16:00
+เริ่มจริง: 2026-11-12 15:20
+สิ้นสุดจริง: ยังไม่กรอกเพราะยังไม่ Done
+
+AC ของงานนี้
+ตั้ง threshold 30 ส่งค่า 25 ต้องเตือนภายใน 30 วินาที
+
+สถานะในสถานการณ์สมมติ: เสร็จรอตรวจ
+ความคืบหน้าโดยทีมประมาณ: 100%
+ผล AC ในสถานการณ์สมมติ: ยังไม่ตรวจ
+ผล DoD ในสถานการณ์สมมติ: ยังไม่ตรวจ
+ผู้ตรวจตัวอย่าง: ยังไม่มี
+
+หลักฐานตัวอย่าง: ยังไม่มี 
+URL หลักฐานจริง: ทีมเติมเมื่อใช้จริง
+จุดที่ต้องดู: ทีมระบุหน้า แถว หรือช่วงเวลา
+ข้อจำกัด: โค้ดเสร็จแต่ยังไม่มีผลตรวจรับ ไม่เป็น Done
+
+เวลาส่งงานตามประกาศ: xx.xx น.
+วันเวลางานด้านบนเป็นเหตุการณ์สมมติ ไม่ใช่กำหนดส่งกรรมการ</pre><h3>Checklist AC ตรวจรับงาน</h3><pre>ตั้ง threshold 30 ส่งค่า 25 ต้องเตือนภายใน 30 วินาที</pre><h3>Checklist DoD ข้อตกลงทีม</h3><pre>งานโค้ดอยู่ใน Git และระบุ Task ID
+มีคนที่ไม่ได้ทำงานนั้นตรวจ AC
+เก็บหลักฐานและอ้าง Evidence ID
+ถ้า contract เปลี่ยนแจ้งทีมและอัปเดต</pre><h3>Checklist งานที่ต้องรอก่อน</h3><pre>T07</pre></article><article id="T09"><h2>T09 ทดสอบรวมเซ็นเซอร์ถึง Dashboard</h2><p>List 05 Done  Labels งาน, Must, ตัวอย่าง</p><h3>Description</h3><pre>ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา
+
+ทีม: T00
+รอบ: ตัวอย่าง
+Owner ตัวอย่าง: สมาชิก ง
+Priority: Must
+งานที่ต้องรอ: T03 T07 T06
+เริ่มตามแผน: 2026-11-12 15:15
+สิ้นสุดตามแผน: 2026-11-12 16:30
+เริ่มจริง: 2026-11-12 16:00
+สิ้นสุดจริง: 2026-11-12 16:30
+
+AC ของงานนี้
+ส่ง MQTT จริง 10 ชุด Dashboard แสดงค่าครบตรงกัน และอ่าน JSON ที่เตรียมไว้ได้
+
+สถานะในสถานการณ์สมมติ: Done
+ความคืบหน้าโดยทีมประมาณ: 100%
+ผล AC ในสถานการณ์สมมติ: ผ่าน
+ผล DoD ในสถานการณ์สมมติ: ผ่าน
+ผู้ตรวจตัวอย่าง: สมาชิก จ
+
+หลักฐานตัวอย่าง: E09 T09_integration_test.csv
+URL หลักฐานจริง: ทีมเติมเมื่อใช้จริง
+จุดที่ต้องดู: ทีมระบุหน้า แถว หรือช่วงเวลา
+ข้อจำกัด: ขอบเขตไม่รวม inference สดจาก Pi ตาม D03
+
+เวลาส่งงานตามประกาศ: xx.xx น.
+วันเวลางานด้านบนเป็นเหตุการณ์สมมติ ไม่ใช่กำหนดส่งกรรมการ</pre><h3>Checklist AC ตรวจรับงาน</h3><pre>ส่ง MQTT จริง 10 ชุด Dashboard แสดงค่าครบตรงกัน และอ่าน JSON ที่เตรียมไว้ได้</pre><h3>Checklist DoD ข้อตกลงทีม</h3><pre>งานโค้ดอยู่ใน Git และระบุ Task ID
+มีคนที่ไม่ได้ทำงานนั้นตรวจ AC
+เก็บหลักฐานและอ้าง Evidence ID
+ถ้า contract เปลี่ยนแจ้งทีมและอัปเดต</pre><h3>Checklist งานที่ต้องรอก่อน</h3><pre>T03
+T07
+T06</pre></article><article id="R01"><h2>R01 ค่าเซ็นเซอร์แกว่งทำให้ส่งค่าที่ใช้ไม่ได้</h2><p>List 06 Risk และ Issue  Labels Risk, ตัวอย่าง</p><h3>Description</h3><pre>Risk ID: R01
+ทีม: T00
+รอบ: ตัวอย่าง
+โอกาส (1-5): 4
+เหตุผลโอกาส: เคยเห็นค่ากระโดดตอนต่อสาย
+รุนแรง (1-5): 3
+เหตุผลความรุนแรง: กระทบ T02 และเลื่อน T03
+ระดับ: 12
+Trigger: ดินเดียวกันต่างเกิน 10 จุดเปอร์เซ็นต์ใน 1 นาที
+Owner: สมาชิก ก
+ลดตอนนี้: ยึดสายและทดลองเฉลี่ย 5 ครั้ง
+แผนสำรอง: เปลี่ยนเซ็นเซอร์สำรอง
+สถานะ: เกิดแล้ว
+ผลจริง: I01 ปิดหลัง D01 ค่าต่างไม่เกิน 3 ใน 1 นาที
+งานที่กระทบ: T02 T03
+
+ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา</pre></article><article id="R02"><h2>R02 Colab ใช้งานต่อไม่ได้</h2><p>List 06 Risk และ Issue  Labels Risk, ตัวอย่าง</p><h3>Description</h3><pre>Risk ID: R02
+ทีม: T00
+รอบ: ตัวอย่าง
+โอกาส (1-5): 3
+เหตุผลโอกาส: ใช้ทรัพยากรร่วมและมีโควต้า
+รุนแรง (1-5): 4
+เหตุผลความรุนแรง: T05 อาจไม่จบ กระทบ T06
+ระดับ: 12
+Trigger: session หยุดหรือไม่มี checkpoint ใหม่เกิน 20 นาที
+Owner: สมาชิก ข
+ลดตอนนี้: save checkpoint ทุก epoch
+แผนสำรอง: ฝึกต่อบนเครื่องสำรองจาก checkpoint
+สถานะ: ยังไม่เกิด
+ผลจริง: T05 จบตามแผน
+งานที่กระทบ: T05 T06
+
+ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา</pre></article><article id="R03"><h2>R03 Pi inference ช้าเกินเกณฑ์</h2><p>List 06 Risk และ Issue  Labels Risk, ตัวอย่าง</p><h3>Description</h3><pre>Risk ID: R03
+ทีม: T00
+รอบ: ตัวอย่าง
+โอกาส (1-5): 4
+เหตุผลโอกาส: ยังไม่เคยวัดบน Pi เครื่องนี้
+รุนแรง (1-5): 3
+เหตุผลความรุนแรง: กระทบฟีเจอร์ Should และการสาธิตภาพสด
+ระดับ: 12
+Trigger: ถึง checkpoint 16.00 แล้วยังรันหรือวัดเวลาไม่ได้
+Owner: สมาชิก ข
+ลดตอนนี้: ทดลองโมเดลเล็กบน Pi เร็วขึ้น
+แผนสำรอง: ใช้ JSON ที่เตรียมไว้ แสดงข้อจำกัดให้ชัด
+สถานะ: เกิดแล้ว
+ผลจริง: C02 D03 เลื่อนไปรอบถัดไป ไม่อ้างว่าระบบครบวงจรผ่านแล้ว
+งานที่กระทบ: T06 T09
+
+ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา</pre></article><article id="I01"><h2>ค่าเซ็นเซอร์แกว่งในดินเดียวกัน</h2><p>List 06 Risk และ Issue  Labels Issue, ตัวอย่าง</p><h3>Description</h3><pre>Issue ID: I01
+ทีม: T00
+รอบ: ตัวอย่าง
+วันเวลา: 2026-11-12 14:00
+กระทบ Task: T02 T03
+Owner: สมาชิก ก
+สิ่งที่ทำ: เฉลี่ย 5 ครั้ง ตรวจและยึดขั้วสาย
+Decision ID: D01
+ผลตรวจหลังแก้: วัดซ้ำ 1 นาที ค่าต่างไม่เกิน 3 จุดเปอร์เซ็นต์
+ปิดเมื่อ: 2026-11-12 14:40
+สถานะ: ปิดแล้ว
+Risk ID: R01
+Evidence ID: E02
+URL หลักฐาน: 
+งานที่กระทบ: T02 T03
+ความเสี่ยงที่เกี่ยวข้อง: R01
+การตัดสินใจ: D01
+
+ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา</pre></article><article id="C01"><h2>C01 ทบทวนผลเซ็นเซอร์</h2><p>List 07 Checkpoint Decision และ Report  Labels Checkpoint, ตัวอย่าง</p><h3>Description</h3><pre>Checkpoint ID: C01
+ทีม: T00
+รอบ: ตัวอย่าง
+วันเวลา: 2026-11-12 15:00
+ผู้ร่วม: สมาชิก ก ง จ
+งานที่ทบทวน: T02 T03 T07 T09
+พบอะไร: T02 ช้า 20 นาที T03 เริ่มแล้ว คาดพร้อมก่อน T09
+Decision ID: D02
+งานที่ทบทวนจริง: T02 T03 T07 T09
+ข้อสรุป: D02
+
+ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา</pre></article><article id="C02"><h2>C02 ทบทวน inference</h2><p>List 07 Checkpoint Decision และ Report  Labels Checkpoint, ตัวอย่าง</p><h3>Description</h3><pre>Checkpoint ID: C02
+ทีม: T00
+รอบ: ตัวอย่าง
+วันเวลา: 2026-11-12 16:00
+ผู้ร่วม: สมาชิก ข ง จ
+งานที่ทบทวน: T06 T09
+พบอะไร: T06 ยังไม่พร้อมทดสอบบน Pi ต้องระบุขอบเขตเดโม
+Decision ID: D03
+งานที่ทบทวนจริง: T06 T09
+ข้อสรุป: D03
+
+ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา</pre></article><article id="D01"><h2>D01 แก้ค่าแกว่งที่ต้นทาง</h2><p>List 07 Checkpoint Decision และ Report  Labels Decision, ตัวอย่าง</p><h3>Description</h3><pre>Decision ID: D01
+ทีม: T00
+รอบ: ตัวอย่าง
+วันเวลา: 2026-11-12 14:10
+สถานการณ์: I01 กระทบ T02
+ทางเลือก: เฉลี่ยและตรวจสาย หรือเปลี่ยนเซ็นเซอร์
+เลือกและเหตุผล: เฉลี่ย 5 ครั้งและตรวจสายเพราะทดลองได้ทันที ถ้าไม่ดีค่อยเปลี่ยน
+ผู้ตัดสินใจ: สมาชิก ก ง
+อ้างอิง: T02 R01 I01
+ผลที่ตามมา: 14.40 ผ่านเกณฑ์ ค่าต่างไม่เกิน 3 ใน 1 นาที
+Risk ที่เกี่ยวข้อง: R01
+งานที่เกี่ยวข้อง: T02
+Issue ที่เกี่ยวข้อง: R01
+
+ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา</pre></article><article id="D02"><h2>D02 ขยับ T03 คงเวลา T09</h2><p>List 07 Checkpoint Decision และ Report  Labels Decision, ตัวอย่าง</p><h3>Description</h3><pre>Decision ID: D02
+ทีม: T00
+รอบ: ตัวอย่าง
+วันเวลา: 2026-11-12 15:00
+สถานการณ์: T02 ช้า 20 นาที T03 เริ่ม 14.40
+ทางเลือก: ขยับ T09 หรือคงเวลา
+เลือกและเหตุผล: คง T09 ที่ 16.00 เพราะ T03 คาดพร้อม 15.10 และ T07 ทดสอบ mock ต่อได้
+ผู้ตัดสินใจ: สมาชิก จ ง
+อ้างอิง: C01 T02 T03 T07 T09
+ผลที่ตามมา: T03 เสร็จ 15.10 T09 เริ่ม 16.00
+Risk ที่เกี่ยวข้อง: 
+งานที่เกี่ยวข้อง: T02 T03 T07 T09
+Issue ที่เกี่ยวข้อง: 
+
+ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา</pre></article><article id="D03"><h2>D03 เลื่อน T06 และจำกัดขอบเขตทดสอบ</h2><p>List 07 Checkpoint Decision และ Report  Labels Decision, ตัวอย่าง</p><h3>Description</h3><pre>Decision ID: D03
+ทีม: T00
+รอบ: ตัวอย่าง
+วันเวลา: 2026-11-12 16:00
+สถานการณ์: T06 ยังไม่พร้อมบน Pi
+ทางเลือก: ดึงคนจากงาน Must หรือเลื่อนไปรอบหน้า
+เลือกและเหตุผล: เลื่อนงาน Should ใช้ JSON ที่เตรียมไว้ใน T09 และระบุว่าไม่ใช่ inference สด
+ผู้ตัดสินใจ: สมาชิก จ ข ง
+อ้างอิง: C02 T06 T09 R03
+ผลที่ตามมา: T09 ผ่านเฉพาะเซ็นเซอร์และ JSON ที่เตรียมไว้ T06 ยังไม่ Done
+Risk ที่เกี่ยวข้อง: R03
+งานที่เกี่ยวข้อง: T06 T09
+Issue ที่เกี่ยวข้อง: 
+
+ข้อมูลโรงเรือนใน Kit เป็นสถานการณ์สมมติสำหรับสาธิตวิธีบันทึก ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา</pre></article><article id="RPT01"><h2>RPT01 รายงานตัวอย่างรอบ 1</h2><p>List 07 Checkpoint Decision และ Report  Labels Report, ตัวอย่าง</p><h3>Description</h3><pre># T00 รายงานตัวอย่างรอบแรก
+
+ข้อมูลโรงเรือนทั้งหมดเป็นสถานการณ์สมมติสำหรับเรียนรู้ ไม่ใช่โจทย์แข่งขันหรือผลงานจริง ชื่อไฟล์หลักฐานเป็นตัวอย่าง ไม่มีไฟล์ทดสอบหรือ URL หลักฐานจริงแนบมา
+
+Report ID RPT01
+Snapshot ID EX-T00-R1-v1
+เวลาส่งตามประกาศ xx.xx น.
+
+## เป้าหมายและผลจริง
+
+เป้าหมายคืออ่านค่าเซ็นเซอร์ถึง Dashboard ทดลองโมเดลใบผัก และพยายามรันบน Pi
+Must 7 งาน ได้แก่ T01 T02 T03 T04 T05 T07 T09 ผ่าน AC และ DoD ในสถานการณ์สมมติ
+T06 ยังทำและ T08 รอตรวจ จึงไม่เป็น Done
+T02 ช้า 20 นาทีจากแผน 14.20 เป็น 14.40 น. T03 จึงเริ่ม 14.40 และเสร็จ 15.10 น.
+D02 คง T09 ที่ 16.00 น. เพราะยังพร้อมทัน และทดสอบจบ 16.30 น.
+
+## ปัญหาและการแก้ไข
+
+14.00 น. พบ I01 ค่าเซ็นเซอร์ในดินเดียวกันแกว่ง 40–55 จุด กระทบ T02 และ T03
+สมาชิก ก กับ ง เลือก D01 เฉลี่ย 5 ครั้งและตรวจขั้วสาย ก่อนเปลี่ยนเซ็นเซอร์
+14.40 น. ทดสอบซ้ำ 1 นาทีค่าต่างไม่เกิน 3 จุดเปอร์เซ็นต์ ปิด I01 อ้าง E02
+R01 เกิดเป็นปัญหาแล้ว ส่วน R03 เกิดขึ้นเมื่อ T06 ยังวัดเวลาบน Pi ไม่ได้ตาม Checkpoint
+
+## การติดตามและตัดสินใจ
+
+C01 เวลา 15.00 น. ทบทวนผลกระทบจาก T02 แล้วบันทึก D02 คงเวลาทดสอบรวม
+C02 เวลา 16.00 น. พบ T06 ยังไม่พร้อม จึงเลือก D03 เลื่อนงาน Should และใช้ JSON ที่เตรียมไว้ใน T09
+ผลคือทดสอบเซ็นเซอร์จริงถึง Dashboard ได้ตาม AC ของ T09 แต่ยังพิสูจน์กล้องถึง Dashboard แบบครบวงจรไม่ได้
+
+## วิธีทำงานร่วมกัน
+
+สมาชิก ก ดูเซ็นเซอร์ สมาชิก ข ดูโมเดลและ Pi สมาชิก ค ดู Dashboard สมาชิก ง รวมระบบ สมาชิก จ ติดตามและสรุปรายงาน
+สมาชิก ง ช่วย ก ตรวจสายเมื่อเกิด I01 ส่วน ค ใช้ mock ตาม contract ทำงานต่อระหว่างรอ T03
+ผู้ตรวจงานเป็นคนอื่นจาก Owner และบันทึกชื่อในแผนงาน
+
+## Retrospective
+
+- Keep ตกลง contract ก่อนแยกงาน ทำให้ทำและทดสอบ Dashboard ด้วย mock ได้
+- Problem เริ่มทดลอง Pi หลังฝึกโมเดลจบ ทำให้พบปัญหาติดตั้งและเวลารันช้า
+- Try รอบถัดไปแยก T06 เป็นติดตั้งและวัดเวลา สมาชิก ข รับผิดชอบ นัดทบทวนตอนเริ่มรอบ
+- ผล Try รอบก่อน ยังไม่มีรอบก่อน
+- งานต่อไป ตรวจรับ T08 และทำ T06 พร้อมทดสอบ inference สดถึง Dashboard เพิ่ม
+
+## บัญชีหลักฐานสมมติ
+
+- E01  ชื่อไฟล์สมมติ contract.md  ยืนยันอะไร ข้อตกลง interface  จุดที่ทีมควรระบุเมื่อใช้จริง เวอร์ชันหรือ commit
+- E02  ชื่อไฟล์สมมติ T02_sensor_test.csv  ยืนยันอะไร ค่าก่อนและหลังแก้ I01  จุดที่ทีมควรระบุเมื่อใช้จริง ช่วงแถวทดสอบและหน่วย
+- E03  ชื่อไฟล์สมมติ T03_mqtt_log.txt  ยืนยันอะไร ส่งค่าต่อเนื่อง 5 นาที  จุดที่ทีมควรระบุเมื่อใช้จริง ช่วงเวลาใน log
+- E04  ชื่อไฟล์สมมติ T04_data_split.csv  ยืนยันอะไร การแยกภาพ train/test  จุดที่ทีมควรระบุเมื่อใช้จริง รายการและจำนวนภาพ
+- E05  ชื่อไฟล์สมมติ T05_test_results.png  ยืนยันอะไร ผล test และ confusion matrix  จุดที่ทีมควรระบุเมื่อใช้จริง ตัวเลขและชุดข้อมูล
+- E07  ชื่อไฟล์สมมติ T07_mock_test.png  ยืนยันอะไร Dashboard รับข้อมูลตาม contract  จุดที่ทีมควรระบุเมื่อใช้จริง ชุด mock และผลที่เห็น
+- E09  ชื่อไฟล์สมมติ T09_integration_test.csv  ยืนยันอะไร ทดสอบรวม 10 ชุด  จุดที่ทีมควรระบุเมื่อใช้จริง ข้อมูลเข้าและผลแสดงเทียบกัน
+
+ไม่มีไฟล์หลักฐานจริงใน Kit ทีมต้องสร้างหลักฐานจากงานจริงและวาง URL ที่เข้าถึงได้ก่อนส่ง</pre></article><article id="RPT02"><h2>RPT02 ร่างรายงานรอบ 2</h2><p>List 07 Checkpoint Decision และ Report  Labels Report, ร่าง</p><h3>Description</h3><pre>ร่างสำหรับฝึกกรอก ยังไม่มีเหตุการณ์หรือผลการทำงานของรอบ 2
+
+เวลาส่งงาน xx.xx น.
+ใช้ practice_templates/REPORT.txt เป็นแนวทางเตรียมข้อมูล แล้วกรอก Template กรรมการในวันแข่งขัน</pre></article><article id="RPT03"><h2>RPT03 ร่างรายงานรอบ 3</h2><p>List 07 Checkpoint Decision และ Report  Labels Report, ร่าง</p><h3>Description</h3><pre>ร่างสำหรับฝึกกรอก ยังไม่มีเหตุการณ์หรือผลการทำงานของรอบ 3
+
+เวลาส่งงาน xx.xx น.
+ใช้ practice_templates/REPORT.txt เป็นแนวทางเตรียมข้อมูล แล้วกรอก Template กรรมการในวันแข่งขัน</pre></article></main>
+<footer><div>TESA Top Gun Rally 2026  Kit ตัวอย่างเครื่องมือติดตามงานของทีม  ข้อมูลโรงเรือนทั้งหมดเป็นสถานการณ์สมมติสำหรับเรียนรู้</div></footer></body></html>

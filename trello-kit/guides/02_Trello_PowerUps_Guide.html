@@ -1,0 +1,120 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>คู่มือ Power-Up ของ Trello</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1f3a5f;--teal:#2F6F73;--panel:#EEF6FA;--mint:#CFEFD9;--mintText:#1b5e3a;--peach:#FFE1C9;--hl:#d8f3d0;--grey:#DCE6F0;--ink:#1e2a38;--muted:#5b6b7b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font-family:'Prompt','Sarabun',system-ui,sans-serif;font-size:17px;line-height:1.8}
+a{color:var(--teal)}
+nav.top{border-bottom:1px solid var(--teal);background:#fff;position:sticky;top:0;z-index:5}
+nav.top .in{max-width:1040px;margin:auto;padding:10px 20px;display:flex;gap:6px 22px;flex-wrap:wrap;align-items:center}
+nav.top .brand{font-weight:600;color:var(--navy);margin-right:auto}
+nav.top a{text-decoration:none;color:var(--navy);padding:4px 0;border-bottom:2px solid transparent}
+nav.top a.cur{border-bottom-color:var(--teal);color:var(--teal)}
+main{max-width:1040px;margin:auto;padding:0 20px 60px}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:center;padding:36px 0 10px}
+.hero h1{font-size:34px;line-height:1.3;margin:0 0 10px;color:var(--navy);font-weight:600}
+.hero p.lead{font-size:19px;margin:0 0 8px}
+.hero .kicker{display:inline-block;background:var(--mint);color:var(--mintText);padding:2px 12px;font-size:14px;letter-spacing:.3px;margin-bottom:12px}
+.toc{border:1px solid var(--teal);background:var(--panel);padding:12px 18px;margin:14px 0 26px;font-size:15px}
+.toc b{color:var(--navy);margin-right:10px}
+.toc a{display:inline-block;margin:2px 14px 2px 0;text-decoration:none;color:var(--navy)}
+.toc a:before{content:"• ";color:var(--teal)}
+section{margin:34px 0}
+h2{font-size:24px;color:var(--navy);margin:0 0 14px;font-weight:600;padding-left:12px;border-left:5px solid var(--teal)}
+h3{font-size:19px;color:var(--teal);margin:22px 0 8px;font-weight:600}
+.panel{background:var(--panel);border:1px solid var(--teal);padding:22px 22px 16px;margin:26px 0 16px;position:relative}
+.panel .tag{position:absolute;top:-15px;left:14px;background:var(--mint);color:var(--mintText);font-weight:600;padding:1px 12px;font-size:15px;border:1px solid var(--teal)}
+.panel.peach{background:var(--peach);border-color:#c98a5a}
+.panel.peach .tag{background:#fff;color:#8a4b1e}
+.panel p:last-child,.panel ul:last-child{margin-bottom:0}
+mark{background:var(--hl);color:inherit;padding:0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;background:#fff;margin:10px 0}
+th,td{border:1px solid var(--teal);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--panel);text-align:center;color:var(--navy);font-weight:600}
+.scroll{overflow-x:auto}
+ul{padding-left:24px}li{margin:6px 0}
+figure{margin:22px 0;padding:0}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);margin-top:6px;text-align:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0}
+.card{border:1px solid var(--teal);background:#fff;padding:14px 16px}
+.card b{display:block;color:var(--navy);margin-bottom:4px}
+.steps{counter-reset:s;padding-left:0;list-style:none}
+.steps li{counter-increment:s;position:relative;padding-left:46px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;border:2px solid var(--navy);background:var(--hl);color:var(--navy);font-weight:600;text-align:center;line-height:30px;font-size:16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 16px}
+.set{padding:26px 20px 14px;position:relative;background:#fff}
+.set .big{position:absolute;top:-16px;left:14px;font-weight:700;font-size:17px;padding:2px 14px}
+.set h4{margin:0 0 6px;font-size:21px;color:var(--navy);font-weight:600}
+.set code{font-family:inherit;background:#fff;border:1px solid var(--navy);padding:0 8px;font-weight:600}
+.set.look{border:2px dashed var(--navy);background:var(--grey)}.set.look .big{background:var(--navy);color:#fff}
+.set.real{border:3px solid #1b5e3a;background:var(--mint)}.set.real .big{background:#1b5e3a;color:#fff}
+.set ul{margin:6px 0 0}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--teal);margin-top:40px;padding:14px 0;font-size:14px;color:var(--muted)}
+.small{font-size:14px;color:var(--muted)}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.grid2,.cards{grid-template-columns:1fr}.hero h1{font-size:27px}}
+@media print{nav.top{position:static}body{font-size:15px}}
+
+.lists{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}
+.list{background:var(--panel);border:1px solid var(--teal);padding:12px 12px 8px;margin:0}
+.list h2{font-size:17px;border:0;padding:0;margin:0 0 8px;color:var(--navy)}
+a.card{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--navy);padding:9px 11px;margin:8px 0;font-size:15px;line-height:1.5}
+a.card:hover{background:var(--hl)}
+.meta{font-size:12.5px;color:var(--mintText);background:var(--mint);display:block;width:max-content;max-width:100%;padding:0 8px;margin-bottom:4px}
+.empty{color:var(--muted);font-size:13.5px}
+.chips span{display:inline-block;border:1px solid var(--teal);background:#fff;padding:1px 12px;margin:0 8px 6px 0;font-size:15px}
+article{border:1px solid var(--teal);background:#fff;padding:18px 22px;margin:22px 0;scroll-margin-top:70px}
+article h2{font-size:21px;margin-bottom:6px}article h3{margin:14px 0 6px;font-size:16px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.75 'Prompt',system-ui,sans-serif;background:var(--panel);border-left:4px solid var(--teal);padding:12px 16px;margin:6px 0}
+a.btn{display:inline-block;background:#1b5e3a;color:#fff;text-decoration:none;padding:10px 22px;font-weight:600;font-size:18px;border:2px solid var(--navy)}
+a.btn:hover{background:var(--navy)}
+iframe{display:block;border:1px solid var(--teal);background:#fff;width:100%}
+section{scroll-margin-top:70px}
+@media(max-width:1000px){.lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.lists{grid-template-columns:1fr}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<filter id="sk" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter>
+<symbol id="chibi" viewBox="0 0 100 130">
+ <g stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M30 128 v-30 q0-22 20-22 q20 0 20 22 v30 z" fill="var(--shirt,#FFE1C9)"/>
+  <path d="M30 100 l-9 20" fill="none"/><path d="M70 100 l9 20" fill="none"/>
+  <circle cx="50" cy="48" r="32" fill="#FFF4EC"/>
+  <path d="M18 46 q4-34 32-34 q28 0 32 34 q-8-10-20-12 q-12 2-24 0 q-12 2-20 12z" fill="#1f3a5f"/>
+  <circle cx="39" cy="54" r="2.6" fill="#1f3a5f" stroke="none"/><circle cx="61" cy="54" r="2.6" fill="#1f3a5f" stroke="none"/>
+  <path d="M44 66 q6 5 12 0" fill="none"/>
+ </g>
+ <circle cx="31" cy="62" r="5" fill="#F7B8B8" opacity=".8"/><circle cx="69" cy="62" r="5" fill="#F7B8B8" opacity=".8"/>
+</symbol>
+<symbol id="doc" viewBox="0 0 80 100">
+ <path d="M8 6 h46 l18 18 v70 h-64 z" fill="var(--doc,#fff)" stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round"/>
+ <path d="M54 6 v18 h18" fill="none" stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round"/>
+ <path d="M20 44 h40 M20 58 h40 M20 72 h28" stroke="#1f3a5f" stroke-width="2.6" stroke-linecap="round" opacity=".6"/>
+</symbol>
+<symbol id="board" viewBox="0 0 120 90">
+ <rect x="4" y="4" width="112" height="82" fill="#fff" stroke="#1f3a5f" stroke-width="2.6"/>
+ <rect x="12" y="14" width="28" height="60" fill="#DCE6F0" stroke="#1f3a5f" stroke-width="2"/>
+ <rect x="46" y="14" width="28" height="60" fill="#FFE1C9" stroke="#1f3a5f" stroke-width="2"/>
+ <rect x="80" y="14" width="28" height="60" fill="#CFEFD9" stroke="#1f3a5f" stroke-width="2"/>
+ <rect x="16" y="20" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/><rect x="16" y="34" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/>
+ <rect x="50" y="20" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/>
+ <rect x="84" y="20" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/><rect x="84" y="34" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/><rect x="84" y="48" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/>
+</symbol>
+<symbol id="folder" viewBox="0 0 100 80">
+ <path d="M6 16 h30 l8 8 h50 v50 h-88 z" fill="#FFE1C9" stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round"/>
+ <path d="M6 34 h88" stroke="#1f3a5f" stroke-width="2.6"/>
+</symbol>
+<symbol id="clock" viewBox="0 0 80 80">
+ <circle cx="40" cy="40" r="33" fill="#fff" stroke="#1f3a5f" stroke-width="2.6"/>
+ <path d="M40 18 v22 l14 8" fill="none" stroke="#1f3a5f" stroke-width="2.8" stroke-linecap="round"/>
+</symbol>
+<symbol id="arrow" viewBox="0 0 70 50"><path d="M4 16 h36 v-12 l26 21 l-26 21 v-12 h-36 z" fill="#1f3a5f"/></symbol>
+<symbol id="star" viewBox="0 0 40 40"><path d="M20 3 l5 11 12 1 -9 8 3 12 -11-6 -11 6 3-12 -9-8 12-1z" fill="#FFD66B" stroke="#1f3a5f" stroke-width="2" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<nav class="top"><div class="in"><span class="brand">TGR2026 Trello Kit</span><a href="../../index.html">หน้ารวม Kit</a><a href="../START_HERE.html" class="">เริ่มที่นี่</a><a href="../BOARD_EXAMPLE.html" class="">บอร์ดตัวอย่าง</a><a href="../CARD_CATALOG.html" class="">ข้อความการ์ด</a><a href="../guides/01_Trello_User_Guide.html" class="">คู่มือ Trello</a><a href="../guides/02_Trello_PowerUps_Guide.html" class="cur">คู่มือ Power-Up</a></div></nav><main><div class="hero"><div><span class="kicker">คู่มือ Power-Up</span><h1>คู่มือเลือก Power Up สำหรับ Trello Free</h1><p class="lead">Trello Free เปิด Power-Up ได้ แต่ผู้พัฒนาแต่ละตัวอาจเก็บค่าบริการแยก คำว่าเปิดบน Free ได้จึงไม่เท่ากับใช้ทุกฟังก์ชันฟรีต่อเนื่อง</p></div><figure><svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ทีม 5 คนล้อมบอร์ดติดตามงาน"><use href="#board" x="170" y="20" width="180" height="135" /><use href="#chibi" x="20" y="150" width="90" height="117.0" style="--shirt:#FFE1C9"/><use href="#chibi" x="115" y="150" width="90" height="117.0" style="--shirt:#CFEFD9"/><use href="#chibi" x="210" y="150" width="90" height="117.0" style="--shirt:#DCE6F0"/><use href="#chibi" x="305" y="150" width="90" height="117.0" style="--shirt:#F7D6E0"/><use href="#chibi" x="400" y="150" width="90" height="117.0" style="--shirt:#FFF1B8"/><rect x="150" y="272" width="220" height="26" fill="#d8f3d0"/><text x="260" y="292" font-size="18" font-weight="600" text-anchor="middle" fill="#1f3a5f" style="font-family:'Prompt',sans-serif">ทีมเดียว เห็นสถานะเดียวกัน</text></svg></figure></div><div class="toc"><b>ในหน้านี้</b><a href="#s1">ตั้ง Dashcards และเชื่อมหลักฐาน</a><a href="#s2">Relation และ Dependency เลือกแบบใด</a><a href="#s3">ฟิลด์เสริม ปฏิทิน และแหล่งอ้างอิง</a></div><div class="panel peach"><span class="tag">ย้ำ</span>
+<p><b>ของที่ส่งจริง</b> ส่งด้วย <mark>Excel และ MS Word ตาม Template ที่กรรมการจะแจกให้ในวันแข่ง</mark> ผ่านช่องทางและเวลาที่กรรมการประกาศ (ในเอกสารนี้เขียนเวลาเป็น xx.xx น. ไว้ก่อน)</p>
+<p><b>ตัวอย่างใน Kit นี้อาจมีเนื้อหามากกว่าสิ่งที่ต้องส่งจริง</b> ตั้งใจให้เห็นภาพรวมของเครื่องมือบริหารจัดการและติดตามงานที่ทันสมัย ทีมเลือกใช้เท่าที่ช่วยให้ทำงานได้จริง การใช้หรือไม่ใช้ Trello ไม่มีผลต่อคะแนน</p></div><section id="s0"><div class="scroll"><table><tr><th>Power-Up</th><th>ใช้ใน Kit</th><th>ขอบเขตที่เลือก</th></tr><tr><td>Dashcards</td><td>นับงานติดขัด รอตรวจ และ Must</td><td>ใช้ตัวนับตาม List/Label; alerts ต้อง Premium/Enterprise</td></tr><tr><td>Google Drive</td><td>แนบแผน รายงานและหลักฐาน</td><td>ไฟล์อยู่ใน Drive ต้องเชื่อมบัญชีและตรวจสิทธิ์ไฟล์</td></tr><tr><td>GitHub</td><td>อ้าง PR commit issue เป็นหลักฐาน</td><td>ใช้เมื่อตัวงานอยู่ใน GitHub และผู้ใช้มีสิทธิ์ repository</td></tr><tr><td>Calendar</td><td>เห็นการ์ดตาม Due date</td><td>Calendar Power-Up แยกจาก Calendar view ของ Premium</td></tr><tr><td>Amazing Fields</td><td>ฟิลด์เพิ่ม เช่น ผ่าน AC ผ่าน DoD ประมาณเวลา</td><td>Free จำกัด 3 ฟิลด์; สูตรและ Card Reference ไม่รวม</td></tr></table></div><h3>เริ่มน้อยและใช้ให้ตรงปัญหา</h3><p>แนะนำ Dashcards กับ Google Drive ก่อน ทีมพัฒนาซอฟต์แวร์เพิ่ม GitHub ถ้าต้องการ ส่วน Calendar และ Amazing Fields เลือกตามความจำเป็น</p><p>ไม่มีการผูก Power-Up เหล่านี้เข้าบัญชีให้ในไฟล์ Kit ให้เปิด Board แล้วเลือก Power-Ups แล้วเลือก Add Power-Ups ค้นชื่อ ตรวจผู้พัฒนา แล้วกด Add ตามขั้นตอนของแต่ละตัว</p></section><section id="s1"><h2>ตั้ง Dashcards และเชื่อมหลักฐาน</h2><h3>Dashcards สำหรับภาพรวมของทีม</h3><ul><li>เพิ่ม Dashcards แล้วเปิดปุ่ม Track บนหัวบอร์ด</li><li>เลือก Customize และเลือกบอร์ดของทีม</li><li>สร้างตัวนับ “งานติดขัด” โดยกรอง List ติดขัด และ Label งาน</li><li>สร้างตัวนับ “งานรอตรวจ” โดยกรอง List เสร็จรอตรวจ และ Label งาน</li><li>สร้างตัวนับ “Must ยังไม่ Done” โดยเลือก Label Must และเลือก List งานที่ยังไม่ Done</li></ul><p>ถ้าเมนูตัวกรองรองรับการเลือกหลาย List ให้เลือก List 01 ถึง 04 สำหรับงาน Must ที่เหลือ หากไม่สะดวก ให้ทำตัวนับ Must แยกตาม List แล้วอ่านประกอบกัน ตัวอย่างจบรอบแรกมีงานติดขัด 0 รอตรวจ 2 และ Must ยังไม่ Done 1</p><p>อย่านับ Risk Report หรือการ์ดข้อมูลเป็นงาน และอย่าใช้จำนวน Done เป็นคะแนนคุณภาพ Dashcards แบบ alerts ต้อง Premium/Enterprise ส่วนการกรอง native Custom Fields ต้องมีแพ็กเกจที่รองรับ [1]</p><h3>Google Drive สำหรับหลักฐาน</h3><p>เพิ่ม Google Drive เปิดการ์ด แล้วเลือก Google Drive แล้วเลือก Attach a File หรือ Attach a Folder เชื่อมบัญชีของตนแล้วเลือกไฟล์ เขียน Evidence ID และจุดที่ต้องดูใน Description ด้วย ไฟล์ยังอยู่ใน Drive การแนบไม่ได้เปิดสิทธิ์ให้คนอื่นเอง [2]</p><h3>GitHub สำหรับงานพัฒนา</h3><p>เพิ่ม GitHub และเชื่อมบัญชีที่มีสิทธิ์ repository แล้วแนบ PR commit หรือ issue กับการ์ด Task ID ที่ตรงกัน อธิบายว่าหลักฐานยืนยันอะไร การมี commit ไม่ได้แทนผลทดสอบหรือ AC ที่ผ่าน [3]</p></section><section id="s2"><h2>Relation และ Dependency เลือกแบบใด</h2><div class="scroll"><table><tr><th>ตัวเลือก</th><th>เชื่อมอะไร</th><th>ค่าใช้จ่ายหรือข้อจำกัด</th></tr><tr><td>Checklist และลิงก์การ์ด</td><td>งานก่อน ถึง หลัง หรือการ์ดที่เกี่ยวข้อง</td><td>ใช้ฟรีด้วยฟังก์ชันพื้นฐาน ต้องดูแลสถานะเอง</td></tr><tr><td>Card Dependencies by Screenful</td><td>blocks/blocked by related และ parent/child ข้ามบอร์ด</td><td>มี trial 7 วัน หลังจากนั้นเป็น subscription แยก</td></tr><tr><td>Amazing Fields Card Reference</td><td>อ้างการ์ดเป็นฟิลด์</td><td>ต้อง Advanced ขึ้นไป ไม่รวม Free</td></tr><tr><td>Planyway Dependencies</td><td>dependency ในการวางแผน</td><td>อยู่ในแผนเสียเงิน ไม่รวมแผน Free</td></tr></table></div><p>ใน Kit ให้เริ่มจากวิธีฟรีในคู่มือ Trello หน้า 4 และ RELATION_MAP.md ส่วน Screenful ใช้สาธิตเป็นตัวเลือกเสริมได้ แต่ไม่กำหนดเป็นเงื่อนไขแข่งขันหรือบอกว่าฟรีถาวร [4][5][6]</p><h3>ถ้าทดลอง Screenful</h3><ul><li>เพิ่ม Card Dependencies by Screenful และตรวจเงื่อนไข trial ของผู้พัฒนา</li><li>เลือก T03 แล้วกำหนด blocked by T02; ตรวจความสัมพันธ์จากทั้งสองการ์ด</li><li>ใช้ related สำหรับ I01 กับ D01 แยกจาก dependency ของลำดับงาน</li><li>อ่านว่า Power-Up กำหนด Done อย่างไร ก่อนใช้สถานะ resolved เป็นข้อสรุป</li><li>ถ้าจะใช้ฟรีต่อหลัง trial ให้บันทึกรหัสและลิงก์การ์ดสำคัญใน Description ด้วย</li></ul><p>ความสัมพันธ์ช่วยให้เห็นผลกระทบ แต่ไม่ใช่การรับรองว่าแผนเวลาถูกต้อง หรือหลักฐานการตรวจ AC และ DoD ครบแล้ว</p></section><section id="s3"><h2>ฟิลด์เสริม ปฏิทิน และแหล่งอ้างอิง</h2><h3>Amazing Fields แบบ Free</h3><p>เพิ่ม Power-Up และเปิด Settings สร้างเพียง 3 ฟิลด์ เช่น ผ่าน AC ผ่าน DoD เป็น dropdown และประมาณเวลาเป็น number เก็บ Priority และรอบไว้ใน Labels แทน ไม่ตั้งสูตรคูณ Risk หรือ Card Reference เพราะไม่อยู่ใน Free [5]</p><p>ผู้พัฒนามี trial ฟังก์ชันระดับสูง ตอนทดลองให้ตรวจว่าแต่ละฟิลด์อยู่ใน Free จริง และอย่าพึ่งการแก้ฟิลด์ผ่านแอปมือถือ ใช้เว็บคอมพิวเตอร์เป็นหลัก</p><h3>Calendar Power Up</h3><p>เพิ่ม Calendar แล้วเปิดปฏิทินจากหัวบอร์ด การ์ดต้องมี Due date จึงแสดงตามกำหนด [7] ช่วงที่เวลาส่งยังเป็น xx.xx ให้เขียนใน Description ก่อน อย่ากรอกเวลาเดาในช่อง Due date ของงานส่ง</p><h3>เอกสารผู้พัฒนา</h3><p>[1] support.atlassian.com/trello/docs/trello-dashcards/<br>[2] support.atlassian.com/trello/docs/using-the-google-drive-power-up/<br>[3] support.atlassian.com/trello/docs/using-the-github-power-up/<br>[4] screenful.com/card-dependencies-for-trello<br>[5] docs.amazingpowerups.com/article/51-trello-custom-fields-amazing-fields-comparison<br>[6] planyway.com/pricing<br>[7] support.atlassian.com/trello/docs/using-the-calendar-power-up/</p><p>ตรวจเอกสารวันที่ 13 พฤศจิกายน 2569 เงื่อนไขแผนและเมนูอาจเปลี่ยน ให้ตรวจหน้าผู้พัฒนาก่อนเริ่มแข่งขัน</p></section></main>
+<footer><div>TESA Top Gun Rally 2026  Kit ตัวอย่างเครื่องมือติดตามงานของทีม  ข้อมูลโรงเรือนทั้งหมดเป็นสถานการณ์สมมติสำหรับเรียนรู้</div></footer></body></html>

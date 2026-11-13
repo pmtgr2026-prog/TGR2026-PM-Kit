@@ -1,0 +1,118 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>บอร์ดตัวอย่าง Trello</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1f3a5f;--teal:#2F6F73;--panel:#EEF6FA;--mint:#CFEFD9;--mintText:#1b5e3a;--peach:#FFE1C9;--hl:#d8f3d0;--grey:#DCE6F0;--ink:#1e2a38;--muted:#5b6b7b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font-family:'Prompt','Sarabun',system-ui,sans-serif;font-size:17px;line-height:1.8}
+a{color:var(--teal)}
+nav.top{border-bottom:1px solid var(--teal);background:#fff;position:sticky;top:0;z-index:5}
+nav.top .in{max-width:1040px;margin:auto;padding:10px 20px;display:flex;gap:6px 22px;flex-wrap:wrap;align-items:center}
+nav.top .brand{font-weight:600;color:var(--navy);margin-right:auto}
+nav.top a{text-decoration:none;color:var(--navy);padding:4px 0;border-bottom:2px solid transparent}
+nav.top a.cur{border-bottom-color:var(--teal);color:var(--teal)}
+main{max-width:1040px;margin:auto;padding:0 20px 60px}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:center;padding:36px 0 10px}
+.hero h1{font-size:34px;line-height:1.3;margin:0 0 10px;color:var(--navy);font-weight:600}
+.hero p.lead{font-size:19px;margin:0 0 8px}
+.hero .kicker{display:inline-block;background:var(--mint);color:var(--mintText);padding:2px 12px;font-size:14px;letter-spacing:.3px;margin-bottom:12px}
+.toc{border:1px solid var(--teal);background:var(--panel);padding:12px 18px;margin:14px 0 26px;font-size:15px}
+.toc b{color:var(--navy);margin-right:10px}
+.toc a{display:inline-block;margin:2px 14px 2px 0;text-decoration:none;color:var(--navy)}
+.toc a:before{content:"• ";color:var(--teal)}
+section{margin:34px 0}
+h2{font-size:24px;color:var(--navy);margin:0 0 14px;font-weight:600;padding-left:12px;border-left:5px solid var(--teal)}
+h3{font-size:19px;color:var(--teal);margin:22px 0 8px;font-weight:600}
+.panel{background:var(--panel);border:1px solid var(--teal);padding:22px 22px 16px;margin:26px 0 16px;position:relative}
+.panel .tag{position:absolute;top:-15px;left:14px;background:var(--mint);color:var(--mintText);font-weight:600;padding:1px 12px;font-size:15px;border:1px solid var(--teal)}
+.panel.peach{background:var(--peach);border-color:#c98a5a}
+.panel.peach .tag{background:#fff;color:#8a4b1e}
+.panel p:last-child,.panel ul:last-child{margin-bottom:0}
+mark{background:var(--hl);color:inherit;padding:0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;background:#fff;margin:10px 0}
+th,td{border:1px solid var(--teal);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--panel);text-align:center;color:var(--navy);font-weight:600}
+.scroll{overflow-x:auto}
+ul{padding-left:24px}li{margin:6px 0}
+figure{margin:22px 0;padding:0}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);margin-top:6px;text-align:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0}
+.card{border:1px solid var(--teal);background:#fff;padding:14px 16px}
+.card b{display:block;color:var(--navy);margin-bottom:4px}
+.steps{counter-reset:s;padding-left:0;list-style:none}
+.steps li{counter-increment:s;position:relative;padding-left:46px;margin:10px 0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;border:2px solid var(--navy);background:var(--hl);color:var(--navy);font-weight:600;text-align:center;line-height:30px;font-size:16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 16px}
+.set{padding:26px 20px 14px;position:relative;background:#fff}
+.set .big{position:absolute;top:-16px;left:14px;font-weight:700;font-size:17px;padding:2px 14px}
+.set h4{margin:0 0 6px;font-size:21px;color:var(--navy);font-weight:600}
+.set code{font-family:inherit;background:#fff;border:1px solid var(--navy);padding:0 8px;font-weight:600}
+.set.look{border:2px dashed var(--navy);background:var(--grey)}.set.look .big{background:var(--navy);color:#fff}
+.set.real{border:3px solid #1b5e3a;background:var(--mint)}.set.real .big{background:#1b5e3a;color:#fff}
+.set ul{margin:6px 0 0}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--teal);margin-top:40px;padding:14px 0;font-size:14px;color:var(--muted)}
+.small{font-size:14px;color:var(--muted)}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.grid2,.cards{grid-template-columns:1fr}.hero h1{font-size:27px}}
+@media print{nav.top{position:static}body{font-size:15px}}
+
+.lists{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}
+.list{background:var(--panel);border:1px solid var(--teal);padding:12px 12px 8px;margin:0}
+.list h2{font-size:17px;border:0;padding:0;margin:0 0 8px;color:var(--navy)}
+a.card{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--navy);padding:9px 11px;margin:8px 0;font-size:15px;line-height:1.5}
+a.card:hover{background:var(--hl)}
+.meta{font-size:12.5px;color:var(--mintText);background:var(--mint);display:block;width:max-content;max-width:100%;padding:0 8px;margin-bottom:4px}
+.empty{color:var(--muted);font-size:13.5px}
+.chips span{display:inline-block;border:1px solid var(--teal);background:#fff;padding:1px 12px;margin:0 8px 6px 0;font-size:15px}
+article{border:1px solid var(--teal);background:#fff;padding:18px 22px;margin:22px 0;scroll-margin-top:70px}
+article h2{font-size:21px;margin-bottom:6px}article h3{margin:14px 0 6px;font-size:16px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.75 'Prompt',system-ui,sans-serif;background:var(--panel);border-left:4px solid var(--teal);padding:12px 16px;margin:6px 0}
+a.btn{display:inline-block;background:#1b5e3a;color:#fff;text-decoration:none;padding:10px 22px;font-weight:600;font-size:18px;border:2px solid var(--navy)}
+a.btn:hover{background:var(--navy)}
+iframe{display:block;border:1px solid var(--teal);background:#fff;width:100%}
+section{scroll-margin-top:70px}
+@media(max-width:1000px){.lists{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.lists{grid-template-columns:1fr}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<filter id="sk" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter>
+<symbol id="chibi" viewBox="0 0 100 130">
+ <g stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M30 128 v-30 q0-22 20-22 q20 0 20 22 v30 z" fill="var(--shirt,#FFE1C9)"/>
+  <path d="M30 100 l-9 20" fill="none"/><path d="M70 100 l9 20" fill="none"/>
+  <circle cx="50" cy="48" r="32" fill="#FFF4EC"/>
+  <path d="M18 46 q4-34 32-34 q28 0 32 34 q-8-10-20-12 q-12 2-24 0 q-12 2-20 12z" fill="#1f3a5f"/>
+  <circle cx="39" cy="54" r="2.6" fill="#1f3a5f" stroke="none"/><circle cx="61" cy="54" r="2.6" fill="#1f3a5f" stroke="none"/>
+  <path d="M44 66 q6 5 12 0" fill="none"/>
+ </g>
+ <circle cx="31" cy="62" r="5" fill="#F7B8B8" opacity=".8"/><circle cx="69" cy="62" r="5" fill="#F7B8B8" opacity=".8"/>
+</symbol>
+<symbol id="doc" viewBox="0 0 80 100">
+ <path d="M8 6 h46 l18 18 v70 h-64 z" fill="var(--doc,#fff)" stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round"/>
+ <path d="M54 6 v18 h18" fill="none" stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round"/>
+ <path d="M20 44 h40 M20 58 h40 M20 72 h28" stroke="#1f3a5f" stroke-width="2.6" stroke-linecap="round" opacity=".6"/>
+</symbol>
+<symbol id="board" viewBox="0 0 120 90">
+ <rect x="4" y="4" width="112" height="82" fill="#fff" stroke="#1f3a5f" stroke-width="2.6"/>
+ <rect x="12" y="14" width="28" height="60" fill="#DCE6F0" stroke="#1f3a5f" stroke-width="2"/>
+ <rect x="46" y="14" width="28" height="60" fill="#FFE1C9" stroke="#1f3a5f" stroke-width="2"/>
+ <rect x="80" y="14" width="28" height="60" fill="#CFEFD9" stroke="#1f3a5f" stroke-width="2"/>
+ <rect x="16" y="20" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/><rect x="16" y="34" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/>
+ <rect x="50" y="20" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/>
+ <rect x="84" y="20" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/><rect x="84" y="34" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/><rect x="84" y="48" width="20" height="10" fill="#fff" stroke="#1f3a5f" stroke-width="1.6"/>
+</symbol>
+<symbol id="folder" viewBox="0 0 100 80">
+ <path d="M6 16 h30 l8 8 h50 v50 h-88 z" fill="#FFE1C9" stroke="#1f3a5f" stroke-width="2.6" stroke-linejoin="round"/>
+ <path d="M6 34 h88" stroke="#1f3a5f" stroke-width="2.6"/>
+</symbol>
+<symbol id="clock" viewBox="0 0 80 80">
+ <circle cx="40" cy="40" r="33" fill="#fff" stroke="#1f3a5f" stroke-width="2.6"/>
+ <path d="M40 18 v22 l14 8" fill="none" stroke="#1f3a5f" stroke-width="2.8" stroke-linecap="round"/>
+</symbol>
+<symbol id="arrow" viewBox="0 0 70 50"><path d="M4 16 h36 v-12 l26 21 l-26 21 v-12 h-36 z" fill="#1f3a5f"/></symbol>
+<symbol id="star" viewBox="0 0 40 40"><path d="M20 3 l5 11 12 1 -9 8 3 12 -11-6 -11 6 3-12 -9-8 12-1z" fill="#FFD66B" stroke="#1f3a5f" stroke-width="2" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<nav class="top"><div class="in"><span class="brand">TGR2026 Trello Kit</span><a href="../index.html">หน้ารวม Kit</a><a href="START_HERE.html" class="">เริ่มที่นี่</a><a href="BOARD_EXAMPLE.html" class="cur">บอร์ดตัวอย่าง</a><a href="CARD_CATALOG.html" class="">ข้อความการ์ด</a><a href="guides/01_Trello_User_Guide.html" class="">คู่มือ Trello</a><a href="guides/02_Trello_PowerUps_Guide.html" class="">คู่มือ Power-Up</a></div></nav><main style="max-width:1280px"><div style="padding-top:30px"><span class="kicker" style="display:inline-block;background:var(--mint);color:var(--mintText);padding:2px 12px;font-size:14px">บอร์ดตัวอย่าง</span><h1 style="font-size:30px;color:var(--navy);margin:8px 0;font-weight:600">T00 PM Board ตัวอย่างจบรอบแรก</h1><p>ภาพโครงสร้างจำลองสำหรับเรียนรู้ ไม่ใช่บอร์ด Trello ที่ใช้งานจริง คลิกการ์ดเพื่ออ่านเนื้อหาที่เตรียมไว้</p><p class="chips"><span>เวลาส่งงาน xx.xx น.</span><span>Must Done 7</span><span>กำลังทำ 1</span><span>รอตรวจ 1</span></p></div><div class="lists"><section class="list"><h2>00 เริ่มที่นี่</h2><a class="card" href="CARD_CATALOG.html#INFO"><div class="meta">ข้อมูล</div>เริ่มที่นี่ วิธีใช้บอร์ด</a><a class="card" href="CARD_CATALOG.html#TEAM"><div class="meta">ข้อมูล</div>ทีม T00 และบทบาท</a><a class="card" href="CARD_CATALOG.html#DOD"><div class="meta">ข้อมูล</div>ข้อตกลง Definition of Done</a><a class="card" href="CARD_CATALOG.html#LINKS"><div class="meta">ข้อมูล</div>ช่องทางส่งงานและหลักฐาน</a></section><section class="list"><h2>01 ยังไม่เริ่ม</h2><p class="empty">ไม่มีการ์ดในสถานะนี้ ณ จุดจบของตัวอย่าง</p></section><section class="list"><h2>02 กำลังทำ</h2><a class="card" href="CARD_CATALOG.html#T06"><div class="meta">งาน, Should, ตัวอย่าง</div>T06 รัน inference บน Pi</a></section><section class="list"><h2>03 ติดขัด</h2><p class="empty">ไม่มีการ์ดในสถานะนี้ ณ จุดจบของตัวอย่าง</p></section><section class="list"><h2>04 เสร็จรอตรวจ</h2><a class="card" href="CARD_CATALOG.html#T08"><div class="meta">งาน, Should, ตัวอย่าง</div>T08 ทำกฎเตือนความชื้นต่ำ</a></section><section class="list"><h2>05 Done</h2><a class="card" href="CARD_CATALOG.html#T01"><div class="meta">งาน, Must, ตัวอย่าง</div>T01 ตกลง interface contract</a><a class="card" href="CARD_CATALOG.html#T02"><div class="meta">งาน, Must, ตัวอย่าง</div>T02 อ่านค่าความชื้นและอุณหภูมิ</a><a class="card" href="CARD_CATALOG.html#T03"><div class="meta">งาน, Must, ตัวอย่าง</div>T03 ส่งค่าเซ็นเซอร์ผ่าน MQTT</a><a class="card" href="CARD_CATALOG.html#T04"><div class="meta">งาน, Must, ตัวอย่าง</div>T04 จัดภาพใบปกติและใบเหลือง</a><a class="card" href="CARD_CATALOG.html#T05"><div class="meta">งาน, Must, ตัวอย่าง</div>T05 ฝึกโมเดลบน Colab</a><a class="card" href="CARD_CATALOG.html#T07"><div class="meta">งาน, Must, ตัวอย่าง</div>T07 ทำ Dashboard รับ MQTT และ JSON</a><a class="card" href="CARD_CATALOG.html#T09"><div class="meta">งาน, Must, ตัวอย่าง</div>T09 ทดสอบรวมเซ็นเซอร์ถึง Dashboard</a></section><section class="list"><h2>06 Risk และ Issue</h2><a class="card" href="CARD_CATALOG.html#R01"><div class="meta">Risk, ตัวอย่าง</div>R01 ค่าเซ็นเซอร์แกว่งทำให้ส่งค่าที่ใช้ไม่ได้</a><a class="card" href="CARD_CATALOG.html#R02"><div class="meta">Risk, ตัวอย่าง</div>R02 Colab ใช้งานต่อไม่ได้</a><a class="card" href="CARD_CATALOG.html#R03"><div class="meta">Risk, ตัวอย่าง</div>R03 Pi inference ช้าเกินเกณฑ์</a><a class="card" href="CARD_CATALOG.html#I01"><div class="meta">Issue, ตัวอย่าง</div>ค่าเซ็นเซอร์แกว่งในดินเดียวกัน</a></section><section class="list"><h2>07 Checkpoint Decision และ Report</h2><a class="card" href="CARD_CATALOG.html#C01"><div class="meta">Checkpoint, ตัวอย่าง</div>C01 ทบทวนผลเซ็นเซอร์</a><a class="card" href="CARD_CATALOG.html#C02"><div class="meta">Checkpoint, ตัวอย่าง</div>C02 ทบทวน inference</a><a class="card" href="CARD_CATALOG.html#D01"><div class="meta">Decision, ตัวอย่าง</div>D01 แก้ค่าแกว่งที่ต้นทาง</a><a class="card" href="CARD_CATALOG.html#D02"><div class="meta">Decision, ตัวอย่าง</div>D02 ขยับ T03 คงเวลา T09</a><a class="card" href="CARD_CATALOG.html#D03"><div class="meta">Decision, ตัวอย่าง</div>D03 เลื่อน T06 และจำกัดขอบเขตทดสอบ</a><a class="card" href="CARD_CATALOG.html#RPT01"><div class="meta">Report, ตัวอย่าง</div>RPT01 รายงานตัวอย่างรอบ 1</a><a class="card" href="CARD_CATALOG.html#RPT02"><div class="meta">Report, ร่าง</div>RPT02 ร่างรายงานรอบ 2</a><a class="card" href="CARD_CATALOG.html#RPT03"><div class="meta">Report, ร่าง</div>RPT03 ร่างรายงานรอบ 3</a></section></div></main>
+<footer><div>TESA Top Gun Rally 2026  Kit ตัวอย่างเครื่องมือติดตามงานของทีม  ข้อมูลโรงเรือนทั้งหมดเป็นสถานการณ์สมมติสำหรับเรียนรู้</div></footer></body></html>
